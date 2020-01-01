@@ -1,0 +1,5 @@
+a = 10.0
+for x in range(10):
+  p = 12 * 4
+  for z in range(a):
+    k = (1000 + 1) * 3

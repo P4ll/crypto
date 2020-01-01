@@ -1,0 +1,4 @@
+a = 10
+for x in range(10):
+  for z in range(a):
+    k = (1000 + 1) * 3

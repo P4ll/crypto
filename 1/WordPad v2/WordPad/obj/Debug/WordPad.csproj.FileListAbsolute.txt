@@ -1,0 +1,18 @@
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\bin\Debug\WordPad.exe.config
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\bin\Debug\WordPad.exe
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\bin\Debug\WordPad.pdb
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\obj\Debug\WordPad.csprojResolveAssemblyReference.cache
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\obj\Debug\WordPad.Form1.resources
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\obj\Debug\WordPad.Properties.Resources.resources
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\obj\Debug\WordPad.csproj.GenerateResource.Cache
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\obj\Debug\WordPad.exe
+c:\users\p4l\documents\visual studio 2015\Projects\WordPad\WordPad\obj\Debug\WordPad.pdb
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\bin\Debug\WordPad.exe.config
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\obj\Debug\WordPad.exe
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\obj\Debug\WordPad.pdb
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\bin\Debug\WordPad.exe
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\bin\Debug\WordPad.pdb
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\obj\Debug\WordPad.Form1.resources
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\obj\Debug\WordPad.Properties.Resources.resources
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\obj\Debug\WordPad.csproj.GenerateResource.Cache
+C:\Users\P4L\Dropbox\СПО\1\WordPad v2\WordPad\obj\Debug\WordPad.csprojResolveAssemblyReference.cache
