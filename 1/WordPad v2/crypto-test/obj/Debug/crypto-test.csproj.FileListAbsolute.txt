@@ -1,5 +1,6 @@
-D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csprojAssemblyReference.cache
 D:\work\crypto\1\WordPad v2\crypto-test\bin\Debug\crypto-test.dll
 D:\work\crypto\1\WordPad v2\crypto-test\bin\Debug\crypto-test.pdb
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.dll
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.pdb
+D:\work\crypto\1\WordPad v2\WordPad\bin\x64\Debug\Plugins\crypto-test.dll
+D:\work\crypto\1\WordPad v2\WordPad\bin\x64\Debug\Plugins\crypto-test.pdb

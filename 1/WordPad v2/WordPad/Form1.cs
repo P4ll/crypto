@@ -27,10 +27,17 @@ namespace WordPad {
 
         public Form1() {
             InitializeComponent();
-            _pluginsFileName = Directory.GetFiles("Plugins");
-            for (int i = 0; i < _pluginsFileName.Length; ++i) {
-                _pluginsFileName[i] = Path.GetFullPath(_pluginsFileName[i]);
+            List<string> fileNames = new List<string>(Directory.GetFiles("Plugins"));
+            for (int i = 0; i < fileNames.Count; ++i) {
+                if (fileNames[i].Substring(fileNames[i].Length - 3) == "dll") {
+                    fileNames[i] = Path.GetFullPath(fileNames[i]);
+                }
+                else {
+                    fileNames.RemoveAt(i);
+                    --i;
+                }
             }
+            _pluginsFileName = fileNames.ToArray();
             int n = _pluginsFileName.Length;
             _pluginNames = new string[n];
             _isPluginStart = new bool[n];

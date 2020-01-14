@@ -5,10 +5,11 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Threading.Tasks;
+using crypto_test;
 
 namespace Plugin {
     public class Class1 {
-        public const string Name = "crypto-test";
+        public const string Name = "Crypto";
         private RichTextBox textBox;
         Form form;
         private int _pos;
@@ -22,7 +23,7 @@ namespace Plugin {
             ToolStripMenuItem item = new ToolStripMenuItem("Crypto test");
             item.DropDownItems.Add("Генерация");
             item.DropDownItems.Add("Тестирование последовательности");
-            item.DropDownItems[0].Click += generate;
+            item.DropDownItems[0].Click += Generator.generate;
             item.DropDownItems[1].Click += test;
             _menu.Items.Add(item);
             _pos = _menu.Items.Count - 1;
@@ -102,20 +103,23 @@ namespace Plugin {
                 extendedStat[i] = (double)Math.Abs(dzetas[i] - lValue) / Math.Sqrt((double)2 * lValue * (4 * Math.Abs(_arrToDz(i)) - 2));
             }
             StringBuilder sb = new StringBuilder();
-            sb.Append("Частотный тест пройден");
+            sb.Append("Частотный тест пройден\n");
             if (statEqual > bound) {
-                sb.Append("Тест на последовательность одинаковых бит не пройден");
+                sb.Append("Тест на последовательность одинаковых бит не пройден\n");
             }
             else {
-                sb.Append("Тест на последовательность одинаковых бит пройден");
+                sb.Append("Тест на последовательность одинаковых бит пройден\n");
             }
+            bool flag = false;
             foreach (var i in extendedStat) {
                 if (i > bound) {
-                    sb.Append("Расширенный тест на произвольные отклонения не пройден");
+                    sb.Append("Расширенный тест на произвольные отклонения не пройден\n");
+                    flag = true;
+                    break;
                 }
             }
-            if (sb.Length == 2) {
-                sb.Append("Расширенный тест на произвольные отклонения пройден");
+            if (!flag) {
+                sb.Append("Расширенный тест на произвольные отклонения пройден\n");
             }
 
             MessageBox.Show(sb.ToString());
