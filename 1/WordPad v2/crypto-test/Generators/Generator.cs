@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace crypto_test {
     abstract class Generator {
         protected RichTextBox _textBox;
+        protected delegate string Generate(int length, ProgressBar progress);
 
         public string Name { get; private set; }
-        protected delegate string Generate(int length);
         protected Generate Gen { get; set; }
 
         public Generator(ref RichTextBox textBox) {
@@ -31,7 +31,16 @@ namespace crypto_test {
             catch (OverflowException e3) {
                 MessageBox.Show("Переполнение");
             }
-            _textBox.Text = Gen(seqLength);
+            ProgressBar genProgress = new ProgressBar() {
+                Visible = true,
+                Minimum = 1,
+                Maximum = seqLength,
+                Value = 1,
+                Step = 1
+            };
+            //_textBox.Controls.Add(genProgress);
+            _textBox.Text = Gen(seqLength, genProgress);
+            //_textBox.Controls.Remove(genProgress);
         }
     }
 }
