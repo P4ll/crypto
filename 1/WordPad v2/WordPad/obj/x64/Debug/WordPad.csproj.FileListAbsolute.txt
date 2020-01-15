@@ -15,3 +15,12 @@ D:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.Properties.Resources.r
 D:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.csproj.GenerateResource.cache
 D:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.exe
 D:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.pdb
+E:\work\crypto\1\WordPad v2\WordPad\bin\x64\Debug\WordPad.exe.config
+E:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.pdb
+E:\work\crypto\1\WordPad v2\WordPad\bin\x64\Debug\WordPad.exe
+E:\work\crypto\1\WordPad v2\WordPad\bin\x64\Debug\WordPad.pdb
+E:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.csprojResolveAssemblyReference.cache
+E:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.Form1.resources
+E:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.Properties.Resources.resources
+E:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.csproj.GenerateResource.Cache
+E:\work\crypto\1\WordPad v2\WordPad\obj\x64\Debug\WordPad.exe

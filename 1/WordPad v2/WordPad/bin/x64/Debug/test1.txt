@@ -1,4 +1,0 @@
-a = 10.0
-for x in range(10):
-  for z in range(a):
-    z = (1000 + 1) * p

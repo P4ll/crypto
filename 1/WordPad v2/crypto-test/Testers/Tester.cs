@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace crypto_test {
     class Tester {
-        private string _delims = " .,\t";
-
+        private const string _delims = " .,\t";
         private RichTextBox textBox;
+
         public Tester(ref RichTextBox textBox) {
             this.textBox = textBox;
         }

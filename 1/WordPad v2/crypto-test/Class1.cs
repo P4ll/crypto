@@ -21,16 +21,17 @@ namespace Plugin {
 
             _menu = (MenuStrip)form.Controls[1];
             ToolStripMenuItem item = new ToolStripMenuItem("Crypto test");
-            
-            Generator generator = new Generator(ref this.textBox);
+
+            GeneratorStd stdGen = new GeneratorStd(ref this.textBox);
+            GeneratorYarrow yGen = new GeneratorYarrow(ref this.textBox);
             Tester tester = new Tester(ref this.textBox);
             
             item.DropDownItems.Add("Генерация");
             item.DropDownItems.Add("Генерация Yarrow-160");
             item.DropDownItems.Add("Тестирование последовательности");
-            
-            item.DropDownItems[0].Click += generator.generateStd;
-            item.DropDownItems[1].Click += generator.generateYarrow;
+
+            item.DropDownItems[0].Click += stdGen.generate;
+            item.DropDownItems[1].Click += yGen.generate;
             item.DropDownItems[2].Click += tester.test;
             
             _menu.Items.Add(item);

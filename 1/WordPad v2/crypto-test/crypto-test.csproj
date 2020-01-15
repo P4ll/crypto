@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Generator.cs" />
+    <Compile Include="Generators\Generator.cs" />
+    <Compile Include="Generators\GeneratorStd.cs" />
+    <Compile Include="Generators\GeneratorYarrow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tester.cs" />
+    <Compile Include="Testers\Tester.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
