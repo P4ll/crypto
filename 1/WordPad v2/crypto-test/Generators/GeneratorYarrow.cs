@@ -12,7 +12,7 @@ namespace crypto_test {
             Gen = generateSeq;
         }
 
-        private string generateSeq(int numbers, ProgressBar progress) {
+        private string generateSeq(int numbers, ref ProgressBar progress) {
             StringBuilder sb = new StringBuilder();
 
             return sb.ToString();
