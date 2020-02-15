@@ -23,33 +23,28 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.name = new System.Windows.Forms.Label();
+            this.progressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // progressBar
+            // progressLabel
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 66);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(445, 23);
-            this.progressBar.TabIndex = 0;
-            // 
-            // name
-            // 
-            this.name.AutoSize = true;
-            this.name.Location = new System.Drawing.Point(13, 29);
-            this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(33, 13);
-            this.name.TabIndex = 1;
-            this.name.Text = "name";
+            this.progressLabel.AutoSize = true;
+            this.progressLabel.Location = new System.Drawing.Point(103, 36);
+            this.progressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.progressLabel.MaximumSize = new System.Drawing.Size(65, 17);
+            this.progressLabel.MinimumSize = new System.Drawing.Size(65, 17);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(65, 17);
+            this.progressLabel.TabIndex = 1;
+            this.progressLabel.Text = "Progress";
             // 
             // Progress
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 143);
-            this.Controls.Add(this.name);
-            this.Controls.Add(this.progressBar);
+            this.ClientSize = new System.Drawing.Size(507, 81);
+            this.Controls.Add(this.progressLabel);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Progress";
             this.Text = "Progress";
             this.ResumeLayout(false);
@@ -58,8 +53,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Label name;
+        private System.Windows.Forms.Label progressLabel;
     }
 }

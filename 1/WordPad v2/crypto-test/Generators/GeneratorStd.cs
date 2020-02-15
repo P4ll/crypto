@@ -12,12 +12,12 @@ namespace crypto_test {
             Gen = generateSeq;
         }
 
-        private string generateSeq(int numbers, ref ProgressBar progress) {
+        private string generateSeq(int numbers, ref Utils.TextProgressBar progress) {
             Random rand = new Random();
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < numbers; ++i) {
                 sb.Append(rand.Next(0, 2));
-                //progress.PerformStep();
+                progress.PerformStep();
             }
             return sb.ToString();
         }

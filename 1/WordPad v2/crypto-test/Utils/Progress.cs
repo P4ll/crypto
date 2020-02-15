@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace crypto_test.Utils {
     public partial class Progress : Form {
-        public Progress() {
+        public TextProgressBar textProgress;
+
+        public Progress(ref TextProgressBar textProgress) {
             InitializeComponent();
-        }
-
-        public ref ProgressBar GetProgress() {
-            return ref progressBar;
-        }
-
-        public ref Label GetLabel() {
-            return ref name;
+            this.textProgress = textProgress;
         }
     }
 }

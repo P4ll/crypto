@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace crypto_test {
     abstract class Generator {
         protected RichTextBox _textBox;
-        protected delegate string Generate(int length, ref ProgressBar progress);
+        protected delegate string Generate(int length, ref Utils.TextProgressBar progress);
 
         public string Name { get; private set; }
         protected Generate Gen { get; set; }
@@ -33,18 +33,16 @@ namespace crypto_test {
             }
 
             Task<string> genTask = Task<string>.Factory.StartNew(() => {
-                Utils.Progress progressForm = new Utils.Progress();
-                progressForm.GetLabel().Text = "Генерация";
-                progressForm.GetProgress() = new ProgressBar() {
-                    Visible = true,
-                    Minimum = 1,
-                    Maximum = seqLength,
-                    Value = 1,
+                Utils.TextProgressBar textProgress = new Utils.TextProgressBar() {
+                    StartValue = 0,
+                    EndValue = seqLength,
                     Step = 1
                 };
-                //progressForm.Show();
-                string res = Gen(seqLength, ref progressForm.GetProgress());
-                //progressForm.Close();
+                Utils.Progress progressForm = new Utils.Progress(ref textProgress);
+                
+                progressForm.Show();
+                string res = Gen(seqLength, ref textProgress);
+                progressForm.Close();
                 return res;
             });
 
