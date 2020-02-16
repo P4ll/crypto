@@ -10,32 +10,36 @@ using System.Windows.Forms;
 
 namespace crypto_test.Utils {
     public partial class Progress : Form {
-        private TextProgressBar _textProgress;
-
-        public delegate void Message(object sender, EventArgs e);
-        public event Message OnPerformStep;
+        public event EventHandler OnPerformStep;
 
         public Progress(int start, int end, int step) {
             InitializeComponent();
-            _textProgress = new TextProgressBar() {
-                StartValue = start,
-                EndValue = end,
-                Step = step
+            progressBar = new ProgressBar() {
+                Step = step,
+                Minimum = start,
+                Maximum = end
             };
-            progressLabel.Text = _textProgress.ToString();
         }
 
         public void PerformStep() {
-            _textProgress.PerformStep();
-            progressLabel.Text = _textProgress.ToString();
+            progressBar.PerformStep();
+            //textBox1.Text = ToString();
+            Console.WriteLine(ToString());
         }
 
         public override string ToString() {
-            return _textProgress.ToString();
+            return $"Progress: {progressBar.Value}\\{progressBar.Maximum}";
         }
 
         private void Progress_Shown(object sender, EventArgs e) {
             
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            if (progressBar.Value >= progressBar.Maximum) progressBar.Value = 0;
+            PerformStep();
+            progressBar.Refresh();
+            this.Refresh();
         }
     }
 }

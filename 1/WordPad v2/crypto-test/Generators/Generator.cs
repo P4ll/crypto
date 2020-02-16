@@ -5,11 +5,12 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace crypto_test {
     abstract class Generator {
         protected RichTextBox _textBox;
-        protected delegate string Generate(int length);
+        protected delegate string Generate(int length, ref Utils.Progress progress);
 
         public string Name { get; private set; }
         protected Generate Gen { get; set; }
@@ -31,13 +32,30 @@ namespace crypto_test {
             catch (OverflowException e3) {
                 MessageBox.Show("Переполнение");
             }
+            Utils.Progress prog = new Utils.Progress(0, seqLength, 1);
+            prog.Show();
 
-            Task<string> genTask = Task<string>.Factory.StartNew(() => {
-                string res = Gen(seqLength);
-                return res;
+            string res = "";
+            Thread genThread = new Thread(() => {
+                res = Gen(seqLength, ref prog);
+                //_textBox.Text = res;
             });
-            genTask.Wait();
-            _textBox.Text = genTask.Result;
+            genThread.Start();
+            genThread.Join();
+            _textBox.Text = res;
+
+
+            //Thread thread = new Thread(() => {
+
+            //    //genThread.Join();
+            //});
+            //thread.Start();
+            //Task<string> genTask = Task<string>.Factory.StartNew(() => {
+            //    string res = Gen(seqLength);
+            //    return res;
+            //});
+            //genTask.Wait();
+            //_textBox.Text = genTask.Result;
         }
     }
 }

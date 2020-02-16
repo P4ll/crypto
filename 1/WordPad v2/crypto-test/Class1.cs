@@ -30,12 +30,18 @@ namespace Plugin {
             item.DropDownItems.Add("Генерация Yarrow-160");
             item.DropDownItems.Add("Тестирование последовательности");
 
+            //item.DropDownItems[0].Click += govno;
             item.DropDownItems[0].Click += stdGen.generate;
             item.DropDownItems[1].Click += yGen.generate;
             item.DropDownItems[2].Click += tester.test;
             
             _menu.Items.Add(item);
             _pos = _menu.Items.Count - 1;
+        }
+
+        private void govno(object sender, EventArgs e) {
+            crypto_test.Utils.Progress tezt = new crypto_test.Utils.Progress(0, 100, 1);
+            tezt.Show();
         }
 
         public void stop() {
