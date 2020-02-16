@@ -29,24 +29,23 @@
             // progressLabel
             // 
             this.progressLabel.AutoSize = true;
-            this.progressLabel.Location = new System.Drawing.Point(103, 36);
-            this.progressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.progressLabel.MaximumSize = new System.Drawing.Size(65, 17);
-            this.progressLabel.MinimumSize = new System.Drawing.Size(65, 17);
+            this.progressLabel.Location = new System.Drawing.Point(77, 29);
+            this.progressLabel.MaximumSize = new System.Drawing.Size(49, 14);
+            this.progressLabel.MinimumSize = new System.Drawing.Size(49, 14);
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(65, 17);
+            this.progressLabel.Size = new System.Drawing.Size(49, 14);
             this.progressLabel.TabIndex = 1;
             this.progressLabel.Text = "Progress";
             // 
             // Progress
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 81);
+            this.ClientSize = new System.Drawing.Size(380, 66);
             this.Controls.Add(this.progressLabel);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Progress";
             this.Text = "Progress";
+            this.Shown += new System.EventHandler(this.Progress_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace crypto_test.Utils {
-    class TextProgressBar {
+    public class TextProgressBar {
         public int StartValue { get; set; }
         public int EndValue { get; set; }
         public int Step { get; set; }
