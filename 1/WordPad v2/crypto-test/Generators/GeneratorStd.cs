@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace crypto_test {
     class GeneratorStd : Generator {
+        private RichTextBox _textBox;
+
         public GeneratorStd(ref RichTextBox textBox) : base(ref textBox) {
             Gen = generateSeq;
+            _textBox = textBox;
         }
 
         private string generateSeq(int numbers, ref Utils.Progress progress) {
@@ -19,6 +22,8 @@ namespace crypto_test {
                 sb.Append(rand.Next(0, 2));
                 progress.PerformStep();
             }
+            
+            _textBox.Text = sb.ToString();
             return sb.ToString();
             //string ans = "";
             //Task formTask = Task.Factory.StartNew(() => {

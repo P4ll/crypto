@@ -41,8 +41,8 @@ namespace crypto_test {
                 //_textBox.Text = res;
             });
             genThread.Start();
-            genThread.Join();
-            _textBox.Text = res;
+            //genThread.Join();
+            //_textBox.Text = res;
 
 
             //Thread thread = new Thread(() => {
