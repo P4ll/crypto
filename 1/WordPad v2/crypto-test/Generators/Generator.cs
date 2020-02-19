@@ -10,7 +10,7 @@ using System.Threading;
 namespace crypto_test {
     abstract class Generator {
         protected RichTextBox _textBox;
-        protected delegate string Generate(int length, ref Utils.Progress progress);
+        protected delegate string Generate(int length);
 
         public string Name { get; private set; }
         protected Generate Gen { get; set; }
@@ -32,30 +32,7 @@ namespace crypto_test {
             catch (OverflowException e3) {
                 MessageBox.Show("Переполнение");
             }
-            Utils.Progress prog = new Utils.Progress(0, seqLength, 1);
-            prog.Show();
-
-            string res = "";
-            Thread genThread = new Thread(() => {
-                res = Gen(seqLength, ref prog);
-                //_textBox.Text = res;
-            });
-            genThread.Start();
-            //genThread.Join();
-            //_textBox.Text = res;
-
-
-            //Thread thread = new Thread(() => {
-
-            //    //genThread.Join();
-            //});
-            //thread.Start();
-            //Task<string> genTask = Task<string>.Factory.StartNew(() => {
-            //    string res = Gen(seqLength);
-            //    return res;
-            //});
-            //genTask.Wait();
-            //_textBox.Text = genTask.Result;
+            _textBox.Text = Gen(seqLength);
         }
     }
 }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace crypto_test {
     class GeneratorStd : Generator {
+        private delegate void SafeCallDelegate(string text);
         private RichTextBox _textBox;
 
         public GeneratorStd(ref RichTextBox textBox) : base(ref textBox) {
@@ -15,35 +16,33 @@ namespace crypto_test {
             _textBox = textBox;
         }
 
-        private string generateSeq(int numbers, ref Utils.Progress progress) {
-            Random rand = new Random();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < numbers; ++i) {
-                sb.Append(rand.Next(0, 2));
-                progress.PerformStep();
-            }
-            
-            _textBox.Text = sb.ToString();
-            return sb.ToString();
-            //string ans = "";
-            //Task formTask = Task.Factory.StartNew(() => {
-            //    Utils.Progress progress = new Utils.Progress(0, numbers, 1);
-            //    progress.Show();
+        private string generateSeq(int numbers) {
+            Utils.Progress progressForm = new Utils.Progress(0, numbers, 1);
+            progressForm.Show();
+            string res = "";
+            Thread thread = new Thread(() => {
+                Random rand = new Random();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < numbers; ++i) {
+                    sb.Append(rand.Next(0, 2));
+                    progressForm.PerformStep();
+                }
+                res = sb.ToString();
+                setTextBoxSafe(sb.ToString());
+                //progressForm.Close();
+            });
+            thread.Start();
+            return res;
+        }
 
-            //    Task<string> ffTask = Task<string>.Factory.StartNew(() => {
-            //        Random rand = new Random();
-            //        StringBuilder sb = new StringBuilder();
-            //        for (int i = 0; i < numbers; ++i) {
-            //            sb.Append(rand.Next(0, 2));
-            //            progress.PerformStep();
-            //        }
-            //        return sb.ToString();
-            //    });
-            //    ffTask.Wait();
-            //    ans = ffTask.Result;
-            //});
-            //formTask.Wait();
-            //return ans;
+        private void setTextBoxSafe(string text) {
+            if (_textBox.InvokeRequired) {
+                var d = new SafeCallDelegate(setTextBoxSafe);
+                _textBox.Invoke(d, new object[] { text });
+            }
+            else {
+                _textBox.Text = text;
+            }
         }
     }
 }
