@@ -16,7 +16,7 @@ namespace crypto_test {
             _textBox = textBox;
         }
 
-        private string generateSeq(int numbers, Utils.Progress progressForm) {            
+        private string generateSeq(int numbers, ref Utils.Progress progressForm) {            
             Random rand = new Random();
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < numbers; ++i) {

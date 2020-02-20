@@ -13,11 +13,12 @@ namespace crypto_test.Utils {
         private delegate void SafeCallDelegate();
         private delegate void SafeFormCloseDelegate();
 
-        public Progress(int start, int end, int step) {
+        public Progress(int start, int end, int step, string labelVal) {
             InitializeComponent();
             progressBar.Maximum = end;
             progressBar.Step = step;
             progressBar.Value = start;
+            label1.Text = labelVal;
         }
 
         public void PerformStep() {
@@ -27,7 +28,6 @@ namespace crypto_test.Utils {
             }
             else {
                 progressBar.PerformStep();
-                //Console.WriteLine(ToString());
             }
         }
 

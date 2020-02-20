@@ -10,7 +10,7 @@ using System.Threading;
 namespace crypto_test {
     abstract class Generator {
         protected RichTextBox _textBox;
-        protected delegate string Generate(int length, Utils.Progress progressForm);
+        protected delegate string Generate(int length, ref Utils.Progress progressForm);
 
         public string Name { get; private set; }
         protected Generate Gen { get; set; }
@@ -32,10 +32,10 @@ namespace crypto_test {
             catch (OverflowException e3) {
                 MessageBox.Show("Переполнение");
             }
-            Utils.Progress progressForm = new Utils.Progress(0, seqLength, 1);
+            Utils.Progress progressForm = new Utils.Progress(0, seqLength, 1, "Gen progress");
             progressForm.Show();
             Thread genThread = new Thread(() => {
-                Gen(seqLength, progressForm);
+                Gen(seqLength, ref progressForm);
             });
             genThread.Start();
         }

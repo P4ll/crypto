@@ -24,24 +24,24 @@ namespace Plugin {
 
             GeneratorStd stdGen = new GeneratorStd(ref this.textBox);
             GeneratorYarrow yGen = new GeneratorYarrow(ref this.textBox);
+            GeffeGen geffeGen = new GeffeGen(ref this.textBox);
+            SquareConGen squareGen = new SquareConGen(ref this.textBox);
             Tester tester = new Tester(ref this.textBox);
             
-            item.DropDownItems.Add("Генерация");
-            item.DropDownItems.Add("Генерация Yarrow-160");
+            item.DropDownItems.Add("Стандартный генератор");
+            item.DropDownItems.Add("Квадратный конгруэнтный генератор");
+            item.DropDownItems.Add("Генератор Геффа");
+            item.DropDownItems.Add("Генератор Yarrow-160");
             item.DropDownItems.Add("Тестирование последовательности");
 
-            //item.DropDownItems[0].Click += govno;
             item.DropDownItems[0].Click += stdGen.generate;
-            item.DropDownItems[1].Click += yGen.generate;
-            item.DropDownItems[2].Click += tester.test;
+            item.DropDownItems[1].Click += squareGen.generate;
+            item.DropDownItems[2].Click += geffeGen.generate;
+            item.DropDownItems[3].Click += yGen.generate;
+            item.DropDownItems[4].Click += tester.test;
             
             _menu.Items.Add(item);
             _pos = _menu.Items.Count - 1;
-        }
-
-        private void govno(object sender, EventArgs e) {
-            crypto_test.Utils.Progress tezt = new crypto_test.Utils.Progress(0, 100, 1);
-            tezt.Show();
         }
 
         public void stop() {
