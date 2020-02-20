@@ -24,31 +24,46 @@
         /// </summary>
         private void InitializeComponent() {
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(27, 27);
+            this.progressBar.Location = new System.Drawing.Point(36, 33);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(324, 23);
+            this.progressBar.Size = new System.Drawing.Size(432, 28);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
             // Progress
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 66);
+            this.ClientSize = new System.Drawing.Size(507, 81);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Progress";
             this.Text = "Progress";
             this.Shown += new System.EventHandler(this.Progress_Shown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label label1;
     }
 }

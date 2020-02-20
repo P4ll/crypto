@@ -11,6 +11,7 @@ using System.Windows.Forms;
 namespace crypto_test.Utils {
     public partial class Progress : Form {
         private delegate void SafeCallDelegate();
+        private delegate void SafeFormCloseDelegate();
 
         public Progress(int start, int end, int step) {
             InitializeComponent();
@@ -27,6 +28,16 @@ namespace crypto_test.Utils {
             else {
                 progressBar.PerformStep();
                 //Console.WriteLine(ToString());
+            }
+        }
+
+        public void CloseFormSafe() {
+            if (this.InvokeRequired) {
+                var d = new SafeFormCloseDelegate(CloseFormSafe);
+                this.Invoke(d, new object[] { });
+            }
+            else {
+                this.Close();
             }
         }
 

@@ -16,23 +16,16 @@ namespace crypto_test {
             _textBox = textBox;
         }
 
-        private string generateSeq(int numbers) {
-            Utils.Progress progressForm = new Utils.Progress(0, numbers, 1);
-            progressForm.Show();
-            string res = "";
-            Thread thread = new Thread(() => {
-                Random rand = new Random();
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < numbers; ++i) {
-                    sb.Append(rand.Next(0, 2));
-                    progressForm.PerformStep();
-                }
-                res = sb.ToString();
-                setTextBoxSafe(sb.ToString());
-                //progressForm.Close();
-            });
-            thread.Start();
-            return res;
+        private string generateSeq(int numbers, Utils.Progress progressForm) {            
+            Random rand = new Random();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < numbers; ++i) {
+                sb.Append(rand.Next(0, 2));
+                progressForm.PerformStep();
+            }
+            progressForm.CloseFormSafe();
+            setTextBoxSafe(sb.ToString());
+            return sb.ToString();
         }
 
         private void setTextBoxSafe(string text) {
