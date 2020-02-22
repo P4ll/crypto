@@ -53,6 +53,7 @@
     <Compile Include="Generators\SquareConGen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Testers\Tester.cs" />
+    <Compile Include="Utils\MultiThreadHelper.cs" />
     <Compile Include="Utils\Progress.cs">
       <SubType>Form</SubType>
     </Compile>

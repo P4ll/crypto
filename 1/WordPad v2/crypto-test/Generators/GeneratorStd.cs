@@ -8,7 +8,6 @@ using System.Threading;
 
 namespace crypto_test {
     class GeneratorStd : Generator {
-        private delegate void SafeCallDelegate(string text);
         private RichTextBox _textBox;
 
         public GeneratorStd(ref RichTextBox textBox) : base(ref textBox) {
@@ -24,18 +23,9 @@ namespace crypto_test {
                 progressForm.PerformStep();
             }
             progressForm.CloseFormSafe();
-            setTextBoxSafe(sb.ToString());
+            Utils.MultiThreadHelper.SetTextBoxSafe(sb.ToString(), ref _textBox);
+            
             return sb.ToString();
-        }
-
-        private void setTextBoxSafe(string text) {
-            if (_textBox.InvokeRequired) {
-                var d = new SafeCallDelegate(setTextBoxSafe);
-                _textBox.Invoke(d, new object[] { text });
-            }
-            else {
-                _textBox.Text = text;
-            }
         }
     }
 }
