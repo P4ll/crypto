@@ -1,0 +1,105 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "crypto-test/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/crypto-test.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/crypto-test.dll": {}
+        }
+      },
+      "WordPad/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/WordPad.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WordPad.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "crypto-test/1.0.0": {
+      "type": "project",
+      "path": "../crypto-test/crypto-test.csproj",
+      "msbuildProject": "../crypto-test/crypto-test.csproj"
+    },
+    "WordPad/1.0.0": {
+      "type": "project",
+      "path": "../WordPad/WordPad.csproj",
+      "msbuildProject": "../WordPad/WordPad.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "WordPad >= 1.0.0",
+      "crypto-test >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\P4L\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\work\\crypto\\1\\WordPad v2\\TestApp\\TestApp.csproj",
+      "projectName": "TestApp",
+      "projectPath": "D:\\work\\crypto\\1\\WordPad v2\\TestApp\\TestApp.csproj",
+      "packagesPath": "C:\\Users\\P4L\\.nuget\\packages\\",
+      "outputPath": "D:\\work\\crypto\\1\\WordPad v2\\TestApp\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\P4L\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {
+            "D:\\work\\crypto\\1\\WordPad v2\\crypto-test\\crypto-test.csproj": {
+              "projectPath": "D:\\work\\crypto\\1\\WordPad v2\\crypto-test\\crypto-test.csproj"
+            },
+            "D:\\work\\crypto\\1\\WordPad v2\\WordPad\\WordPad.csproj": {
+              "projectPath": "D:\\work\\crypto\\1\\WordPad v2\\WordPad\\WordPad.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

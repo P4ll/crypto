@@ -11,8 +11,8 @@ namespace crypto_test {
         
         private const long SEED = 19;
         private const long A_CONST = 1103515245;
-        private const long B_CONST = 48271;//65539;
-        private const long C_CONST = 0; //12345;
+        private const long B_CONST = 65539;//65539;48271
+        private const long C_CONST = 12345; //12345;
         private const long M_CONST = (long)1 << 31;
         private long curAns = SEED;
 
