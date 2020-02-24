@@ -24,7 +24,7 @@ namespace crypto_test {
             }
             double stat = (double)Math.Abs(res) / Math.Sqrt(vals.Length);
             if (stat > bound) {
-                MessageBox.Show($"Частотный тест не пройден. Значени статистики {stat}");
+                MessageBox.Show($"Частотный тест не пройден. Значение статистики {stat}");
                 return;
             }
             int[] valsWoTr = getVals(textBox.Text, true);

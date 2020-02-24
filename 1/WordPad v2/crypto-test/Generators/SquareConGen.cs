@@ -9,12 +9,12 @@ namespace crypto_test {
     public class SquareConGen : Generator {
         private RichTextBox _textBox;
         
-        private const long SEED = 19;
-        private const long A_CONST = 1103515245;
-        private const long B_CONST = 65539;//65539;48271
-        private const long C_CONST = 12345; //12345;
-        private const long M_CONST = (long)1 << 31;
-        private long curAns = SEED;
+        private const ulong SEED = 19;
+        private const ulong A_CONST = 1103515245;
+        private const ulong B_CONST = 65539;//65539;48271
+        private const ulong C_CONST = 12345; //12345;
+        private const ulong M_CONST = (ulong)1 << 31;
+        private ulong curAns = SEED;
 
         public SquareConGen(ref RichTextBox textBox) : base(ref textBox) {
             GenerateSequence = generateSeq;
@@ -22,7 +22,7 @@ namespace crypto_test {
             _textBox = textBox;
         }
 
-        public long Next() {
+        public ulong Next() {
             //curAns = ((A_CONST * A_CONST * curAns) % M_CONST + B_CONST * curAns + C_CONST) % M_CONST;
             //curAns = add(mult(B_CONST, curAns), C_CONST);
             curAns = add(add(mult(mult(A_CONST, A_CONST), curAns), mult(B_CONST, curAns)), C_CONST);
@@ -43,11 +43,11 @@ namespace crypto_test {
             return strAns;
         }
 
-        private long mult(long num1, long num2) {
+        private ulong mult(ulong num1, ulong num2) {
             return (num1 * num2) % M_CONST;
         }
 
-        private long add(long num1, long num2) { 
+        private ulong add(ulong num1, ulong num2) { 
             return (num1 + num2) % M_CONST;
         }
     }

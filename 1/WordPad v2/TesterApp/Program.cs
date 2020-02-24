@@ -17,7 +17,7 @@ namespace TesterApp {
             GeneratorStd generatorStd = new GeneratorStd(ref textBox);
             SquareConGen squareConGen = new SquareConGen(ref textBox);
             GeffeGen geffeGen = new GeffeGen(ref textBox);
-            Testers.GeneratorsTester.Test(geffeGen, 100);
+            Testers.GeneratorsTester.Test(geffeGen, 10);
         }
     }
 }

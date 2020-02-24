@@ -13,7 +13,7 @@ namespace crypto_test {
             Generate = Next;
         }
 
-        private long Next() {
+        private ulong Next() {
             return 0;
         }
 

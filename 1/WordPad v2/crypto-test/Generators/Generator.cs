@@ -11,7 +11,7 @@ namespace crypto_test {
     public abstract class Generator {
         protected RichTextBox _textBox;
         protected delegate string GenerateSeqenceDelegate(int length, ref Utils.Progress progressForm);
-        protected delegate long GenerateDelegate();
+        protected delegate ulong GenerateDelegate();
 
         public string Name { get; private set; }
         protected GenerateSeqenceDelegate GenerateSequence { get; set; }
@@ -42,7 +42,7 @@ namespace crypto_test {
             genThread.Start();
         }
 
-        public long generate() {
+        public ulong generate() {
             return Generate();
         }
     }

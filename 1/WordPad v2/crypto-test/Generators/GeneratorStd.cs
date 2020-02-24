@@ -18,8 +18,8 @@ namespace crypto_test {
             _textBox = textBox;
         }
 
-        public long Next() {
-            return _rand.Next();
+        public ulong Next() {
+            return (ulong)_rand.Next();
         }
 
         private string generateSeq(int numbers, ref Utils.Progress progressForm) {
