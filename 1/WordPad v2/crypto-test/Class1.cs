@@ -34,10 +34,10 @@ namespace Plugin {
             item.DropDownItems.Add("Генератор Yarrow-160");
             item.DropDownItems.Add("Тестирование последовательности");
 
-            item.DropDownItems[0].Click += stdGen.generate;
-            item.DropDownItems[1].Click += squareGen.generate;
-            item.DropDownItems[2].Click += geffeGen.generate;
-            item.DropDownItems[3].Click += yGen.generate;
+            item.DropDownItems[0].Click += stdGen.generateSequence;
+            item.DropDownItems[1].Click += squareGen.generateSequence;
+            item.DropDownItems[2].Click += geffeGen.generateSequence;
+            item.DropDownItems[3].Click += yGen.generateSequence;
             item.DropDownItems[4].Click += tester.test;
             
             _menu.Items.Add(item);

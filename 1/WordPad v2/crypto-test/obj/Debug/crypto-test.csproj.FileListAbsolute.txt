@@ -9,6 +9,5 @@ E:\work\crypto\1\WordPad v2\WordPad\bin\x64\Debug\Plugins\crypto-test.pdb
 E:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csprojResolveAssemblyReference.cache
 E:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.dll
 E:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.pdb
-D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csprojAssemblyReference.cache
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto_test.Utils.Progress.resources
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csproj.GenerateResource.cache

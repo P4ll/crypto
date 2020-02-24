@@ -7,19 +7,25 @@ using Microsoft.VisualBasic;
 using System.Threading;
 
 namespace crypto_test {
-    class GeneratorStd : Generator {
+    public class GeneratorStd : Generator {
         private RichTextBox _textBox;
+        private Random _rand;
 
         public GeneratorStd(ref RichTextBox textBox) : base(ref textBox) {
-            Gen = generateSeq;
+            _rand = new Random();
+            GenerateSequence = generateSeq;
+            Generate = Next;
             _textBox = textBox;
         }
 
-        private string generateSeq(int numbers, ref Utils.Progress progressForm) {            
-            Random rand = new Random();
+        public long Next() {
+            return _rand.Next();
+        }
+
+        private string generateSeq(int numbers, ref Utils.Progress progressForm) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < numbers; ++i) {
-                sb.Append(rand.Next(0, 2));
+                sb.Append(_rand.Next(0, 2));
                 progressForm.PerformStep();
             }
             progressForm.CloseFormSafe();

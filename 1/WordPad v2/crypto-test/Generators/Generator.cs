@@ -8,18 +8,20 @@ using System.Threading.Tasks;
 using System.Threading;
 
 namespace crypto_test {
-    abstract class Generator {
+    public abstract class Generator {
         protected RichTextBox _textBox;
-        protected delegate string Generate(int length, ref Utils.Progress progressForm);
+        protected delegate string GenerateSeqenceDelegate(int length, ref Utils.Progress progressForm);
+        protected delegate long GenerateDelegate();
 
         public string Name { get; private set; }
-        protected Generate Gen { get; set; }
+        protected GenerateSeqenceDelegate GenerateSequence { get; set; }
+        protected GenerateDelegate Generate { get; set; }
 
         public Generator(ref RichTextBox textBox) {
             _textBox = textBox;
         }
 
-        public void generate(object sender, EventArgs e) {
+        public void generateSequence(object sender, EventArgs e) {
             string result = Interaction.InputBox("Введите длину генерируемой последовательности (10000)");
             int seqLength = 10000;
             try {
@@ -35,9 +37,13 @@ namespace crypto_test {
             Utils.Progress progressForm = new Utils.Progress(0, seqLength, 1, "Gen progress");
             progressForm.Show();
             Thread genThread = new Thread(() => {
-                Gen(seqLength, ref progressForm);
+                GenerateSequence(seqLength, ref progressForm);
             });
             genThread.Start();
+        }
+
+        public long generate() {
+            return Generate();
         }
     }
 }

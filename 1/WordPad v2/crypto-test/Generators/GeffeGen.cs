@@ -6,13 +6,18 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 
 namespace crypto_test {
-    class GeffeGen : Generator {
+    public class GeffeGen : Generator {
         public GeffeGen(ref RichTextBox textBox) : base(ref textBox) {
-            Gen = generateSeq;
+            GenerateSequence = generateSeq;
+            Generate = Next;
         }
 
         private string generateSeq(int numbers, ref Utils.Progress progressForm) {
             return "";
+        }
+
+        public long Next() {
+            return 0;
         }
     }
 }

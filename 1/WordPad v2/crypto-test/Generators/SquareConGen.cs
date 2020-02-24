@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 
 namespace crypto_test {
-    class SquareConGen : Generator {
+    public class SquareConGen : Generator {
         private RichTextBox _textBox;
         
         private const long SEED = 19;
@@ -17,7 +17,8 @@ namespace crypto_test {
         private long curAns = SEED;
 
         public SquareConGen(ref RichTextBox textBox) : base(ref textBox) {
-            Gen = generateSeq;
+            GenerateSequence = generateSeq;
+            Generate = Next;
             _textBox = textBox;
         }
 

@@ -7,9 +7,14 @@ using Microsoft.VisualBasic;
 using System.Threading.Tasks;
 
 namespace crypto_test {
-    class GeneratorYarrow : Generator {
+    public class GeneratorYarrow : Generator {
         public GeneratorYarrow(ref RichTextBox textBox) : base(ref textBox) {
-            Gen = generateSeq;
+            GenerateSequence = generateSeq;
+            Generate = Next;
+        }
+
+        private long Next() {
+            return 0;
         }
 
         private string generateSeq(int numbers, ref Utils.Progress progressForm) {
