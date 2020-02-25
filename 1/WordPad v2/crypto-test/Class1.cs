@@ -22,10 +22,10 @@ namespace Plugin {
             _menu = (MenuStrip)form.Controls[1];
             ToolStripMenuItem item = new ToolStripMenuItem("Crypto test");
 
-            GeneratorStd stdGen = new GeneratorStd(ref _textBox);
-            GeneratorYarrow yGen = new GeneratorYarrow(ref _textBox);
-            GeffeGen geffeGen = new GeffeGen(ref _textBox);
-            SquareConGen squareGen = new SquareConGen(ref _textBox);
+            StdGenerator stdGen = new StdGenerator(ref _textBox);
+            YarrowGenerator yGen = new YarrowGenerator(ref _textBox);
+            GeffeGenerator geffeGen = new GeffeGenerator(ref _textBox);
+            SquareGenerator squareGen = new SquareGenerator(ref _textBox);
             Tester tester = new Tester(ref _textBox);
             
             item.DropDownItems.Add("Стандартный генератор");

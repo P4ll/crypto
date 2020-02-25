@@ -7,13 +7,13 @@ using Microsoft.VisualBasic;
 using System.Threading;
 
 namespace crypto_test {
-    public class GeneratorStd : Generator {
+    public class StdGenerator : Generator {
         private RichTextBox _textBox;
         private Random _rand;
 
-        public GeneratorStd(ref RichTextBox textBox) : base(ref textBox) {
+        public StdGenerator(ref RichTextBox textBox) : base(ref textBox) {
             _rand = new Random();
-            GenerateSequenceAbstract = generateSeq;
+            GenerateSequenceAbstract = GenerateSequenceImplementation;
             GenerateNextAbstract = Next;
             _textBox = textBox;
         }
@@ -22,7 +22,7 @@ namespace crypto_test {
             return (ulong)_rand.Next();
         }
 
-        private string generateSeq(int numbers, ref Utils.Progress progressForm) {
+        private string GenerateSequenceImplementation(int numbers, ref Utils.Progress progressForm) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < numbers; ++i) {
                 sb.Append(_rand.Next(0, 2));

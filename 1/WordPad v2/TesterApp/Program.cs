@@ -14,9 +14,9 @@ namespace TesterApp {
 
         static private void TestGen() {
             RichTextBox textBox = new RichTextBox();
-            GeneratorStd generatorStd = new GeneratorStd(ref textBox);
-            SquareConGen squareConGen = new SquareConGen(ref textBox);
-            GeffeGen geffeGen = new GeffeGen(ref textBox);
+            StdGenerator generatorStd = new StdGenerator(ref textBox);
+            SquareGenerator squareConGen = new SquareGenerator(ref textBox);
+            GeffeGenerator geffeGen = new GeffeGenerator(ref textBox);
             Testers.GeneratorsTester.Test(geffeGen, 10);
         }
     }

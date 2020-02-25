@@ -46,12 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Generators\GeffeGen.cs" />
+    <Compile Include="Generators\GeffeGenerator.cs" />
     <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\GeneratorStd.cs" />
-    <Compile Include="Generators\GeneratorYarrow.cs" />
+    <Compile Include="Generators\StdGenerator.cs" />
+    <Compile Include="Generators\YarrowGenerator.cs" />
     <Compile Include="Generators\LFSR.cs" />
-    <Compile Include="Generators\SquareConGen.cs" />
+    <Compile Include="Generators\SquareGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Testers\Tester.cs" />
     <Compile Include="Utils\MultiThreadHelper.cs" />

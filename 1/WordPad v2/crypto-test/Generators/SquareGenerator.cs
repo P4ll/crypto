@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 
 namespace crypto_test {
-    public class SquareConGen : Generator {
+    public class SquareGenerator : Generator {
         private RichTextBox _textBox;
         
         private const ulong Seed = 19;
@@ -16,21 +16,21 @@ namespace crypto_test {
         private const ulong MConst = (ulong)1 << 31;
         private ulong _curAns = Seed;
 
-        public SquareConGen(ref RichTextBox textBox) : base(ref textBox) {
-            GenerateSequenceAbstract = generateSeq;
+        public SquareGenerator(ref RichTextBox textBox) : base(ref textBox) {
+            GenerateSequenceAbstract = GenerateSequenceImplementation;
             GenerateNextAbstract = Next;
             _textBox = textBox;
         }
 
         public ulong Next() {
-            //curAns = ((AConst * AConst * curAns) % MConst + BConst * curAns + CConst) % MConst;
-            //curAns = Add(Mult(BConst, curAns), CConst);
+            //_curAns = ((AConst * AConst * _curAns) % MConst + BConst * _curAns + CConst) % MConst;
+            //_curAns = Add(Mult(BConst, _curAns), CConst);
             _curAns = Add(Add(Mult(Mult(AConst, AConst), _curAns), Mult(BConst, _curAns)), CConst);
             Console.WriteLine(_curAns);
             return _curAns;
         }
 
-        private string generateSeq(int numbers, ref Utils.Progress progressForm) {
+        private string GenerateSequenceImplementation(int numbers, ref Utils.Progress progressForm) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < numbers; ++i) {
                 Next();

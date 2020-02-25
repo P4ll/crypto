@@ -11,4 +11,3 @@ E:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.dll
 E:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.pdb
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto_test.Utils.Progress.resources
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csproj.GenerateResource.cache
-D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csprojAssemblyReference.cache
