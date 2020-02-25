@@ -10,7 +10,7 @@ namespace crypto_test.Utils {
         public int EndValue { get; set; }
         public int Step { get; set; }
         public int CurrentValue { get; private set; }
-        object lockObj = new object();
+        private object _lockObj = new object();
 
         public TextProgressBar() {
         }
@@ -22,7 +22,7 @@ namespace crypto_test.Utils {
         }
 
         public void PerformStep() {
-            lock (lockObj) {
+            lock (_lockObj) {
                 if (CurrentValue < EndValue)
                     CurrentValue += Step;
             }

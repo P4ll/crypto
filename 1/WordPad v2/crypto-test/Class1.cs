@@ -10,23 +10,23 @@ using crypto_test;
 namespace Plugin {
     public class Class1 {
         public const string Name = "Crypto";
-        private RichTextBox textBox;
-        Form form;
+        private RichTextBox _textBox;
+        private Form _form;
         private int _pos;
         private MenuStrip _menu;
 
         public void run(ref Form form, ref RichTextBox textBox) {
-            this.textBox = textBox;
-            this.form = form;
+            _textBox = textBox;
+            _form = form;
 
             _menu = (MenuStrip)form.Controls[1];
             ToolStripMenuItem item = new ToolStripMenuItem("Crypto test");
 
-            GeneratorStd stdGen = new GeneratorStd(ref this.textBox);
-            GeneratorYarrow yGen = new GeneratorYarrow(ref this.textBox);
-            GeffeGen geffeGen = new GeffeGen(ref this.textBox);
-            SquareConGen squareGen = new SquareConGen(ref this.textBox);
-            Tester tester = new Tester(ref this.textBox);
+            GeneratorStd stdGen = new GeneratorStd(ref _textBox);
+            GeneratorYarrow yGen = new GeneratorYarrow(ref _textBox);
+            GeffeGen geffeGen = new GeffeGen(ref _textBox);
+            SquareConGen squareGen = new SquareConGen(ref _textBox);
+            Tester tester = new Tester(ref _textBox);
             
             item.DropDownItems.Add("Стандартный генератор");
             item.DropDownItems.Add("Квадратный конгруэнтный генератор");
@@ -34,11 +34,11 @@ namespace Plugin {
             item.DropDownItems.Add("Генератор Yarrow-160");
             item.DropDownItems.Add("Тестирование последовательности");
 
-            item.DropDownItems[0].Click += stdGen.generateSequence;
-            item.DropDownItems[1].Click += squareGen.generateSequence;
-            item.DropDownItems[2].Click += geffeGen.generateSequence;
-            item.DropDownItems[3].Click += yGen.generateSequence;
-            item.DropDownItems[4].Click += tester.test;
+            item.DropDownItems[0].Click += stdGen.GenerateSequence;
+            item.DropDownItems[1].Click += squareGen.GenerateSequence;
+            item.DropDownItems[2].Click += geffeGen.GenerateSequence;
+            item.DropDownItems[3].Click += yGen.GenerateSequence;
+            item.DropDownItems[4].Click += tester.Test;
             
             _menu.Items.Add(item);
             _pos = _menu.Items.Count - 1;

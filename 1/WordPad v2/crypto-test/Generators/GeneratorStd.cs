@@ -13,8 +13,8 @@ namespace crypto_test {
 
         public GeneratorStd(ref RichTextBox textBox) : base(ref textBox) {
             _rand = new Random();
-            GenerateSequence = generateSeq;
-            Generate = Next;
+            GenerateSequenceAbstract = generateSeq;
+            GenerateNextAbstract = Next;
             _textBox = textBox;
         }
 

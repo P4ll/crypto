@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 namespace crypto_test {
     class Tester {
         private const string _delims = " .,\t";
-        private RichTextBox textBox;
+        private RichTextBox _textBox;
 
         public Tester(ref RichTextBox textBox) {
-            this.textBox = textBox;
+            _textBox = textBox;
         }
 
-        public void test(object sender, EventArgs e) {
+        public void Test(object sender, EventArgs e) {
             double bound = 1.82138636;
-            int[] vals = getVals(textBox.Text, true);
+            int[] vals = GetVals(_textBox.Text, true);
             int res = 0;
             foreach (var i in vals) {
                 res += i;
@@ -27,7 +27,7 @@ namespace crypto_test {
                 MessageBox.Show($"Частотный тест не пройден. Значение статистики {stat}");
                 return;
             }
-            int[] valsWoTr = getVals(textBox.Text, true);
+            int[] valsWoTr = GetVals(_textBox.Text, true);
             int countOnes = 0;
             foreach (var i in valsWoTr) {
                 countOnes += i;
@@ -55,13 +55,13 @@ namespace crypto_test {
             for (int i = -9; i < 10; ++i) {
                 if (i == 0) continue;
                 foreach (var sum in sums) {
-                    if (i == sum) dzetas[_dzToArr(i)]++;
+                    if (i == sum) dzetas[DzToArr(i)]++;
                 }
             }
 
             double[] extendedStat = new double[18];
             for (int i = 0; i < 18; ++i) {
-                extendedStat[i] = (double)Math.Abs(dzetas[i] - lValue) / Math.Sqrt((double)2 * lValue * (4 * Math.Abs(_arrToDz(i)) - 2));
+                extendedStat[i] = (double)Math.Abs(dzetas[i] - lValue) / Math.Sqrt((double)2 * lValue * (4 * Math.Abs(ArrToDz(i)) - 2));
             }
             StringBuilder sb = new StringBuilder();
             sb.Append("Частотный тест пройден\n");
@@ -86,17 +86,17 @@ namespace crypto_test {
             MessageBox.Show(sb.ToString());
         }
 
-        private int _dzToArr(int pos) {
+        private int DzToArr(int pos) {
             if (pos <= -1) return pos + 9;
             else return pos + 8;
         }
 
-        private int _arrToDz(int pos) {
+        private int ArrToDz(int pos) {
             if (pos <= 8) return pos - 9;
             else return pos - 8;
         }
 
-        private int[] getVals(string str, bool transform) {
+        private int[] GetVals(string str, bool transform) {
             List<int> vals = new List<int>();
             for (int i = 0; i < str.Length; ++i) {
                 bool isDel = false;

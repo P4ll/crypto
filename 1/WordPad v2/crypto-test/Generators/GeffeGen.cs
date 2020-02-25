@@ -10,8 +10,8 @@ namespace crypto_test {
         LFSR lfsr1, lfsr2, lfsr3;
 
         public GeffeGen(ref RichTextBox textBox) : base(ref textBox) {
-            GenerateSequence = generateSeq;
-            Generate = Next;
+            GenerateSequenceAbstract = generateSeq;
+            GenerateNextAbstract = Next;
             lfsr1 = new LFSR(new int[] { 0, 1, 4, 18 });
             lfsr3 = new LFSR(new int[] { 2, 30 });
             lfsr2 = new LFSR(new int[] { 0, 3, 5, 29 });
@@ -24,7 +24,7 @@ namespace crypto_test {
                 progressForm.PerformStep();
             }
             progressForm.CloseFormSafe();
-            Utils.MultiThreadHelper.SetTextBoxSafe(sb.ToString(), ref _textBox);
+            Utils.MultiThreadHelper.SetTextBoxSafe(sb.ToString(), ref TextBox);
             return sb.ToString();
         }
 

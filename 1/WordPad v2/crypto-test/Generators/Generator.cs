@@ -9,19 +9,19 @@ using System.Threading;
 
 namespace crypto_test {
     public abstract class Generator {
-        protected RichTextBox _textBox;
+        protected RichTextBox TextBox;
         protected delegate string GenerateSeqenceDelegate(int length, ref Utils.Progress progressForm);
         protected delegate ulong GenerateDelegate();
 
         public string Name { get; private set; }
-        protected GenerateSeqenceDelegate GenerateSequence { get; set; }
-        protected GenerateDelegate Generate { get; set; }
+        protected GenerateSeqenceDelegate GenerateSequenceAbstract { get; set; }
+        protected GenerateDelegate GenerateNextAbstract { get; set; }
 
         public Generator(ref RichTextBox textBox) {
-            _textBox = textBox;
+            TextBox = textBox;
         }
 
-        public void generateSequence(object sender, EventArgs e) {
+        public void GenerateSequence(object sender, EventArgs e) {
             string result = Interaction.InputBox("Введите длину генерируемой последовательности (10000)");
             int seqLength = 10000;
             try {
@@ -37,13 +37,13 @@ namespace crypto_test {
             Utils.Progress progressForm = new Utils.Progress(0, seqLength, 1, "Gen progress");
             progressForm.Show();
             Thread genThread = new Thread(() => {
-                GenerateSequence(seqLength, ref progressForm);
+                GenerateSequenceAbstract(seqLength, ref progressForm);
             });
             genThread.Start();
         }
 
-        public ulong generate() {
-            return Generate();
+        public ulong Generate() {
+            return GenerateNextAbstract();
         }
     }
 }
