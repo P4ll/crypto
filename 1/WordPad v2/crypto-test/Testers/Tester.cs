@@ -10,9 +10,34 @@ namespace crypto_test {
     class Tester {
         private const string _delims = " .,\t";
         private RichTextBox _textBox;
+        private const double _bound = 1.82138636;
 
         public Tester(ref RichTextBox textBox) {
             _textBox = textBox;
+        }
+
+        public void Aa(object sender, EventArgs e) {
+            double stat = 0;
+            if (!FrequencyTest(_textBox.Text, ref stat)) {
+                MessageBox.Show($"Частотный тест не пройден. Значение статистики {stat}");
+                return;
+            }
+            StringBuilder messageBoxAnswer = new StringBuilder();
+            messageBoxAnswer.Append("Частотный тест пройден\n");
+
+            if (IdenticalBitsTest(_textBox.Text)) {
+                messageBoxAnswer.Append("Тест на последовательность одинаковых бит пройден\n");
+            }
+            else {
+                messageBoxAnswer.Append("Тест на последовательность одинаковых бит не пройден\n");
+            }
+
+            if (ExtendedDeviationsTest(_textBox.Text)) {
+                messageBoxAnswer.Append("Расширенный тест на произвольные отклонения пройден\n");
+            }
+            else {
+                messageBoxAnswer.Append("Расширенный тест на произвольные отклонения не пройден\n");
+            }
         }
 
         public void Test(object sender, EventArgs e) {
@@ -23,10 +48,12 @@ namespace crypto_test {
                 res += i;
             }
             double stat = (double)Math.Abs(res) / Math.Sqrt(vals.Length);
-            if (stat > bound) {
+
+            if (!FrequencyTest(_textBox.Text, ref stat)) {
                 MessageBox.Show($"Частотный тест не пройден. Значение статистики {stat}");
                 return;
             }
+
             int[] valsWoTr = GetVals(_textBox.Text, true);
             int countOnes = 0;
             foreach (var i in valsWoTr) {
@@ -86,14 +113,40 @@ namespace crypto_test {
             MessageBox.Show(sb.ToString());
         }
 
+        public bool FrequencyTest(string inputText, ref double statistic) {
+            int[] vals = GetVals(inputText, true);
+            int res = 0;
+            foreach (var i in vals) {
+                res += i;
+            }
+            statistic = (double)Math.Abs(res) / Math.Sqrt(vals.Length);
+            if (statistic > _bound) {
+                return false;
+            }
+            return true;
+        }
+
+        public bool IdenticalBitsTest(string inputText) {
+
+            return false;
+        }
+
+        public bool ExtendedDeviationsTest(string inputText) {
+            return false;
+        }
+
         private int DzToArr(int pos) {
-            if (pos <= -1) return pos + 9;
-            else return pos + 8;
+            if (pos <= -1) 
+                return pos + 9;
+            else
+                return pos + 8;
         }
 
         private int ArrToDz(int pos) {
-            if (pos <= 8) return pos - 9;
-            else return pos - 8;
+            if (pos <= 8)
+                return pos - 9;
+            else
+                return pos - 8;
         }
 
         private int[] GetVals(string str, bool transform) {
