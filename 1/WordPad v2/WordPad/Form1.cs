@@ -62,10 +62,18 @@ namespace WordPad {
             openDialog.FileName = "";
             openDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (openDialog.ShowDialog() == DialogResult.OK) {
-                using (StreamReader sr = new StreamReader(openDialog.FileName, Encoding.Default)) {
-                    textBox.Text = sr.ReadToEnd();
+                //using (StreamReader sr = new StreamReader(openDialog.FileName, Encoding.Default)) {
+                //    textBox.Text = sr.ReadToEnd();
+                //    _currentFileName = openDialog.FileName;
+                //    setFrameName(_currentFileName);
+                //}
+                using (FileStream fs = new FileStream(openDialog.FileName, FileMode.Open, FileAccess.Read)) {
                     _currentFileName = openDialog.FileName;
                     setFrameName(_currentFileName);
+                    byte[] bytes = File.ReadAllBytes(_currentFileName);
+                    fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
+                    string a = Encoding.Default.GetString(bytes);
+                    textBox.Text = a;
                 }
             }
         }
