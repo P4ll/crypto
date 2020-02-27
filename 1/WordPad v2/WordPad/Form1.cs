@@ -62,19 +62,9 @@ namespace WordPad {
             openDialog.FileName = "";
             openDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (openDialog.ShowDialog() == DialogResult.OK) {
-                //using (StreamReader sr = new StreamReader(openDialog.FileName, Encoding.Default)) {
-                //    textBox.Text = sr.ReadToEnd();
-                //    _currentFileName = openDialog.FileName;
-                //    setFrameName(_currentFileName);
-                //}
-                using (FileStream fs = new FileStream(openDialog.FileName, FileMode.Open, FileAccess.Read)) {
-                    _currentFileName = openDialog.FileName;
-                    setFrameName(_currentFileName);
-                    byte[] bytes = File.ReadAllBytes(_currentFileName);
-                    fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
-                    string a = Encoding.Default.GetString(bytes);
-                    textBox.Text = a;
-                }
+                _currentFileName = openDialog.FileName;
+                setFrameName(_currentFileName);
+                textBox.Text = Helpers.ReadHelper.GetTextFromFile(_currentFileName, Encoding.Default, new string[] { "txt" });
             }
         }
 
@@ -87,10 +77,9 @@ namespace WordPad {
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
             if (saveAsDialog.ShowDialog() == DialogResult.OK) {
-                using (StreamWriter sw = new StreamWriter(_currentFileName = saveAsDialog.FileName)) {
-                    sw.Write(textBox.Text);
-                    setFrameName(_currentFileName);
-                }
+                _currentFileName = saveAsDialog.FileName;
+                setFrameName(_currentFileName);
+                Helpers.SaveHelper.SaveTextToFile(textBox.Text, _currentFileName, new string[] { "txt" });
             }
             else {
                 _cans = true;
