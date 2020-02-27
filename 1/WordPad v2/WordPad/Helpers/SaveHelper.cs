@@ -16,8 +16,11 @@ namespace WordPad.Helpers {
             }
             else {
                 List<byte> bytes = new List<byte>();
-                foreach (var ch in text) {
-                    bytes.Add((byte)ch);
+                string[] bytesInStrings = text.Split(' ');
+                foreach (var ch in bytesInStrings) {
+                    if (ch == "" || ch == " ")
+                        continue;
+                    bytes.Add(Byte.Parse(ch));
                 }
                 File.WriteAllBytes(fullFileName, bytes.ToArray());
             }

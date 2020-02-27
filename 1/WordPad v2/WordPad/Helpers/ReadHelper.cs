@@ -27,7 +27,8 @@ namespace WordPad.Helpers {
                 byte[] bytes = File.ReadAllBytes(fullFileName);
                 StringBuilder sb = new StringBuilder();
                 foreach (var curByte in bytes) {
-                    sb.Append(curByte);
+                    sb.Append($"{curByte} ");
+                    //sb.Append(' ');
                 }
                 text = sb.ToString();
             }
