@@ -7,3 +7,6 @@ D:\work\crypto\1\WordPad v2\TesterApp\obj\Debug\TesterApp.csprojAssemblyReferenc
 D:\work\crypto\1\WordPad v2\TesterApp\obj\Debug\TesterApp.csproj.CopyComplete
 D:\work\crypto\1\WordPad v2\TesterApp\obj\Debug\TesterApp.exe
 D:\work\crypto\1\WordPad v2\TesterApp\obj\Debug\TesterApp.pdb
+D:\work\crypto\1\WordPad v2\TesterApp\bin\Debug\WordPad.exe
+D:\work\crypto\1\WordPad v2\TesterApp\bin\Debug\WordPad.pdb
+D:\work\crypto\1\WordPad v2\TesterApp\bin\Debug\WordPad.exe.config

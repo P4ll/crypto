@@ -45,6 +45,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\MD5Transform.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Testers\GeneratorsTester.cs" />
   </ItemGroup>

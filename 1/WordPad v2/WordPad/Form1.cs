@@ -12,8 +12,8 @@ using System.Reflection;
 
 namespace WordPad {
     public partial class Form1 : Form {
-        private const string DIR_PATH = "\\..\\..\\Files\\";
-        private const string STAND_FILE_NAME = "Untitled";
+        private static string DIR_PATH = "\\..\\..\\Files\\";
+        private static string STAND_FILE_NAME = "Untitled";
         private string _currentFileName = STAND_FILE_NAME + ".txt";
         private bool _textChanged = false;
         private string[] _pluginsFileName;
@@ -23,7 +23,7 @@ namespace WordPad {
         private bool _cans = false;
         private bool[] _isPluginStart;
         private object[] objs;
-
+        public static string[] TxtExts = { "txt" };
 
         public Form1() {
             InitializeComponent();
@@ -64,7 +64,7 @@ namespace WordPad {
             if (openDialog.ShowDialog() == DialogResult.OK) {
                 _currentFileName = openDialog.FileName;
                 setFrameName(_currentFileName);
-                textBox.Text = Helpers.ReadHelper.GetTextFromFile(_currentFileName, Encoding.Default, new string[] { "txt" });
+                textBox.Text = Helpers.ReadHelper.GetTextFromFile(_currentFileName, Encoding.Default, TxtExts);
             }
         }
 
@@ -79,7 +79,7 @@ namespace WordPad {
             if (saveAsDialog.ShowDialog() == DialogResult.OK) {
                 _currentFileName = saveAsDialog.FileName;
                 setFrameName(_currentFileName);
-                Helpers.SaveHelper.SaveTextToFile(textBox.Text, _currentFileName, new string[] { "txt" });
+                Helpers.SaveHelper.SaveTextToFile(textBox.Text, _currentFileName, TxtExts);
             }
             else {
                 _cans = true;

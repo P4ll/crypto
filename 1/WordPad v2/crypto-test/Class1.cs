@@ -27,19 +27,22 @@ namespace Plugin {
             GeffeGenerator geffeGen = new GeffeGenerator(ref _textBox);
             SquareGenerator squareGen = new SquareGenerator(ref _textBox);
             Tester tester = new Tester(ref _textBox);
+            MD5Hash md5Hash = new MD5Hash(ref _textBox, ref _form);
             
             item.DropDownItems.Add("Стандартный генератор");
             item.DropDownItems.Add("Квадратный конгруэнтный генератор");
             item.DropDownItems.Add("Генератор Геффа");
             item.DropDownItems.Add("Генератор Yarrow-160");
             item.DropDownItems.Add("Тестирование последовательности");
+            item.DropDownItems.Add("MD5 хеш");
 
             item.DropDownItems[0].Click += stdGen.GenerateSequence;
             item.DropDownItems[1].Click += squareGen.GenerateSequence;
             item.DropDownItems[2].Click += geffeGen.GenerateSequence;
             item.DropDownItems[3].Click += yGen.GenerateSequence;
             item.DropDownItems[4].Click += tester.Test;
-            
+            item.DropDownItems[5].Click += md5Hash.WindowHashing;
+
             _menu.Items.Add(item);
             _pos = _menu.Items.Count - 1;
         }
