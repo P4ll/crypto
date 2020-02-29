@@ -10,10 +10,20 @@ using crypto_test;
 namespace TesterApp {
     class Program {
         static void Main() {
-            //TestGen();
-            //StringBuilder sb = new StringBuilder();
-            //var a = File.ReadAllText("d:\\tt.txt");
-            //Console.Write(Helper.MD5Transform.FullTransform(a));
+            Md5 md5 = new Md5();
+            while (true) {
+                //var input = Console.ReadLine();
+                md5.StringValue = "govno";
+                Console.WriteLine(md5.HexDigest);
+            }
+        }
+
+        private static void GetMD5TableValues() {
+            var a = File.ReadAllText("d:\\tt.txt");
+            Console.Write(Helper.MD5Transform.FullTransform(a));
+        }
+
+        static private void TestShift() {
             Program pr = new Program();
             uint val = 2684354559;
             uint ans = pr.ShiftL(val, 100);

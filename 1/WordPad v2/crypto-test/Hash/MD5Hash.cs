@@ -55,12 +55,8 @@ namespace crypto_test {
             while (bytes.Count % 64 != 56)
                 bytes.Add(0);
             // Добавим в конце биты длины сообщений: вначале 4 младшие байта, затем 4 старших
-            for (int i = 24; i >= 0; i -= 8) {
-                bytes.Add((byte)((messageLength >> i) % 256));
-            }
-            for (int i = 32 + 24; i >= 32; i -= 8) {
-                bytes.Add((byte)((messageLength >> i) % 256));
-            }
+            for (int i = 8; i > 0; i--)
+                bytes.Add((byte)(messageLength >> ((8 - i) * 8) & 0xff));
             // Начальные значения
             uint a = 0x67452301; // 67452301h
             uint b = 0xEFCDAB89; // EFCDAB89h
@@ -107,11 +103,11 @@ namespace crypto_test {
                 c = cc + c;
                 d = dd + d;
             }
-            byte[] bytesOut = new[] { d, c, b, a }.SelectMany(BitConverter.GetBytes).ToArray();
-            return BitConverter.ToString(bytesOut).Replace("-", ""); // 
+            return ReverseByte(a).ToString("x8") + ReverseByte(b).ToString("x8") + 
+                ReverseByte(c).ToString("x8") + ReverseByte(d).ToString("x8");
         }
 
-        private void Trans(int state, ref uint a, uint b, uint c, uint d, uint k, int s, int i) {
+        private void Trans(int state, ref uint a, uint b, uint c, uint d, uint k, ushort s, int i) {
             switch (state) {
                 case 1:
                     /* [abcd k s i] a = b + ((a + F(b,c,d) + X[k] + T[i]) <<< s). */
@@ -132,15 +128,21 @@ namespace crypto_test {
             }
         }
 
-        private uint ShiftL(uint num, int steps) {
-            steps = steps % 32;
-            return (num << steps) + ((num & ((uint.MaxValue >> (32 - steps)) << (32 - steps))) >> (32 - steps));
+        private uint ShiftL(uint num, ushort steps) {
+            return ((num >> 32 - steps) | (num << steps));
+        }
+
+        private uint ReverseByte(uint uiNumber) {
+            return (((uiNumber & 0x000000ff) << 24) |
+                        (uiNumber >> 24) |
+                    ((uiNumber & 0x00ff0000) >> 8) |
+                    ((uiNumber & 0x0000ff00) << 8));
         }
 
         private uint[] GetXArr(ref List<byte> arr, int beg, int end) {
             uint[] x = new uint[16];
             for (int i = beg, j = 0; i <= end && j < 16; i += 4, ++j) {
-                x[j] = ((uint)arr[i] << 24) + ((uint)arr[i] << 16) + ((uint)arr[i] << 8) + (uint)arr[i];
+                x[j] = ((uint)arr[i + 3] << 24) | ((uint)arr[i + 2] << 16) | ((uint)arr[i + 1] << 8) | (uint)arr[i];
             }
             return x;
         }

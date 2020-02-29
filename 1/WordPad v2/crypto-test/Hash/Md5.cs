@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace My.Crypt {
+namespace crypto_test {
     /// <summary>
     /// class for changing event args
     /// </summary>
