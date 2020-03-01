@@ -10,10 +10,14 @@ using crypto_test;
 namespace TesterApp {
     class Program {
         static void Main() {
+            
+        }
+
+        private static void Md5Test() {
             Md5 md5 = new Md5();
             while (true) {
                 //var input = Console.ReadLine();
-                md5.StringValue = "govno";
+                md5.StringValue = "";
                 Console.WriteLine(md5.HexDigest);
             }
         }
