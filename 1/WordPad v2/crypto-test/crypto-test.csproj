@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cipher\AES.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Generators\GeffeGenerator.cs" />
     <Compile Include="Generators\Generator.cs" />

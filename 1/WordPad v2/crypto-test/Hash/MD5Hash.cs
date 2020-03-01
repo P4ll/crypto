@@ -34,6 +34,8 @@ namespace crypto_test {
             _form = form;
         }
 
+        public MD5Hash() { }
+
         public string GetHash(string message, bool isText) {
             List<byte> bytes = new List<byte>();
             if (isText) {
