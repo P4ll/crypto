@@ -48,7 +48,15 @@ namespace crypto_test {
         public AES() {
 
         }
-
+        
+        /// <summary>
+        /// Производит шифрование строки message с помощью пороля хешированного пароля pass (128 бит)
+        /// </summary>
+        /// <param name="message">Строка сообщения</param>
+        /// <param name="pass">Пароль в виде строки</param>
+        /// <param name="isText">Если true, сообщение будет трактоваться как текст,
+        /// иначе - поток байт с побелом в качестве разделителя</param>
+        /// <returns></returns>
         public string Encrypt(string message, string pass, bool isText) {
             List<byte> bytes = new List<byte>();
             if (isText) {
@@ -62,15 +70,13 @@ namespace crypto_test {
                     bytes.Add(Byte.Parse(ch));
                 }
             }
-            MD5Hash hasher = new MD5Hash();
-            string hash = hasher.GetHash(pass, true);
             // добавим в конец размер в 4 байтах
             // добавим 0, пока количество % 128 != 0 (бит)
-            for (int i = 0; i < 4; ++i)
+            for (int i = 3; i >= 0; --i)
                 bytes.Add((byte)((bytes.Count >> (i * 8)) & 0xff));
             while (bytes.Count % 16 != 0)
                 bytes.Add(0);
-            byte[] passInByte = Encoding.ASCII.GetBytes(hash);
+            byte[] passInByte = Encoding.ASCII.GetBytes(pass);
             _keysExp = KeysExpansion(ref passInByte);
             // шифруются каждый из 128-ми битных блоков
             byte[] inputBytes = bytes.ToArray();
@@ -81,6 +87,12 @@ namespace crypto_test {
             return Encoding.ASCII.GetString(inputBytes);
         }
 
+        /// <summary>
+        /// Производит трансформацию входного потока байт через SBox [st, end]
+        /// </summary>
+        /// <param name="bytes">ссылка на массив байт</param>
+        /// <param name="st">индекс начала трансформации</param>
+        /// <param name="end">индекс конца</param>
         private void SubBytes(ref byte[] bytes, int st, int end) {
             for (int i = st; i <= end; ++i) {
                 bytes[i] = _sBox[bytes[i]];
@@ -174,10 +186,30 @@ namespace crypto_test {
             }
         }
 
-        public string Decrypt(string text) {
-            return "";
+        public string Decrypt(string text, string pass) {
+            byte[] bytes = Encoding.ASCII.GetBytes(text);
+            byte[] passInByte = Encoding.ASCII.GetBytes(pass);
+            _keysExp = KeysExpansion(ref passInByte);
+            for (int i = 0; i < bytes.Length; i += 16) {
+                DecryptBlock(ref bytes, i, i + 15);
+            }
+            // поток байт имеет следующую структуру: b[0]..b[k], s[4]..s[0], 0..0
+            // b - байты сообщения, s - 4 байта размера сообщения
+            int messageRightIndex = bytes.Length - 1;
+            while (bytes[messageRightIndex] == 0) {
+                --messageRightIndex;
+            }
+            messageRightIndex -= 4;
+            byte[] decryptedMessage = new byte[messageRightIndex + 1];
+            for (int i = 0; i < decryptedMessage.Length; ++i) {
+                decryptedMessage[i] = bytes[i];
+            }
+            return Encoding.ASCII.GetString(decryptedMessage);
         }
 
+        private void DecryptBlock(ref byte[] bytes, int st, int en) {
+
+        }
         private void EncryptBlock(ref byte[] bytes, int st, int en) {
             AddRoundKey(ref bytes, st, ref _keysExp, st);
             for (int i = 1; i < Nr; ++i) {
