@@ -10,7 +10,7 @@ using crypto_test;
 namespace TesterApp {
     class Program {
         static void Main() {
-            
+            AESTest();
         }
 
         private static void AESTest() {

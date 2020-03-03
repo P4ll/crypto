@@ -162,7 +162,7 @@ namespace crypto_test {
             for (int i = 0; i < bytes.Length; ++i) {
                 ans.Add(bytes[i]);
             }
-            for (int i = Nk; i < Nb * Nr + Nb; ++i) {
+            for (int i = Nk; i < Nb * Nr + Nb; i += 4) {
                 byte[] temp = new byte[4];
                 if (i % Nk == 0) {
                     RotWord(ref temp);
