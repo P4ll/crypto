@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace crypto_test {
-    class AES {
+    public class AES {
 
         private byte[] _sBox =  {0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
                                 0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
@@ -142,6 +142,20 @@ namespace crypto_test {
             int shiftL = (x << 1) & 0xff;
             return hb == 0 ? (byte)shiftL : (byte)(shiftL ^ 0x1b);
         }
+        
+        /// <summary>
+        /// Умножение многочлена в GF(2^8) на x
+        /// </summary>
+        /// <param name="x">Многочлен, умножаемый на x</param>
+        /// <param name="y">Степень x</param>
+        /// <returns></returns>
+        private int XTimePow(int x, int y) {
+            if (y == 0) return 1;
+            for (int i = 0; i < y; ++i) {
+                x = XTime(x);
+            }
+            return x;
+        }
 
         private List<byte> KeysExpansion(ref byte[] bytes) {
             List<byte> ans = new List<byte>();
@@ -208,8 +222,18 @@ namespace crypto_test {
         }
 
         private void DecryptBlock(ref byte[] bytes, int st, int en) {
-
+            AddRoundKey(ref bytes, st, ref _keysExp, Nr * Nb);
+            for (int i = Nr - 1; i >= 1; --i) {
+                InvShiftRow(ref bytes, st, en);
+                InvSubBytes(ref bytes, st, en);
+                AddRoundKey(ref bytes, st, ref _keysExp, i * Nb);
+                InvMixCols(ref bytes, st, en);
+            }
+            InvShiftRow(ref bytes, st, en);
+            InvSubBytes(ref bytes, st, en);
+            AddRoundKey(ref bytes, st, ref _keysExp, 0);
         }
+
         private void EncryptBlock(ref byte[] bytes, int st, int en) {
             AddRoundKey(ref bytes, st, ref _keysExp, st);
             for (int i = 1; i < Nr; ++i) {
@@ -223,5 +247,55 @@ namespace crypto_test {
             AddRoundKey(ref bytes, st, ref _keysExp, Nr * Nb);
         }
 
+        private void InvShiftRow(ref byte[] bytes, int st, int en) {
+            for (int i = 1; i < 4; ++i) {
+                for (int j = 1; j < 4; ++j) {
+                    byte buf = 0;
+                    for (int k = 3; k >= 0; --k) {
+                        if (k == 3) {
+                            buf = bytes[i * 4 + k + st];
+                        }
+                        if(k == 0) {
+                            bytes[i * 4 + k + st] = buf;
+                            continue;
+                        }
+                        bytes[i * 4 + k + st] = bytes[i * 4 + k + st + 1];
+                    } 
+                }
+            }
+        }
+
+        private void InvSubBytes(ref byte[] bytes, int st, int en) {
+            for (int i = st; i <= en; ++i) {
+                bytes[i] = _invSBox[bytes[i]];
+            }
+        }
+
+        private void InvMixCols(ref byte[] bytes, int st, int en) {
+            for (int i = 0; i < 4; ++i) {
+                int[] buff = new int[4];
+                for (int j = 0; j < 4; ++j) {
+                    buff[j] = bytes[j * 4 + i + st];
+                }
+
+                bytes[0 * 4 + i + st] = (byte)(ByteMult(0xE, (byte)buff[0]) ^ ByteMult(0xB, (byte)buff[1]) ^ ByteMult(0xD, (byte)buff[2]) ^ ByteMult(0x9, (byte)buff[3]));
+                bytes[1 * 4 + i + st] = (byte)(ByteMult(0x9, (byte)buff[0]) ^ ByteMult(0xE, (byte)buff[1]) ^ ByteMult(0xB, (byte)buff[2]) ^ ByteMult(0xD, (byte)buff[3]));
+                bytes[2 * 4 + i + st] = (byte)(ByteMult(0xD, (byte)buff[0]) ^ ByteMult(0x9, (byte)buff[1]) ^ ByteMult(0xE, (byte)buff[2]) ^ ByteMult(0xB, (byte)buff[3]));
+                bytes[3 * 4 + i + st] = (byte)(ByteMult(0xB, (byte)buff[0]) ^ ByteMult(0xD, (byte)buff[1]) ^ ByteMult(0x9, (byte)buff[2]) ^ ByteMult(0xE, (byte)buff[3]));
+            }
+        }
+
+        private int ByteMult(byte a, byte b) {
+            int res = 0;
+            int bb = b;
+            for (int i = 0; i < 8; ++i) {
+                if (bb == 0) break;
+                if ((bb & 1) == 1) {
+                    res ^= XTimePow(a, i);
+                }
+                bb >>= 1;
+            }
+            return res;
+        }
     }
 }

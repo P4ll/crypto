@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 
 namespace crypto_test {
-    class MD5Hash {
+    public class MD5Hash {
         private RichTextBox _textBox;
         private Form _form;
         private Utils.Progress _progress;

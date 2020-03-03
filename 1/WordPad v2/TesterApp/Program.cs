@@ -13,6 +13,18 @@ namespace TesterApp {
             
         }
 
+        private static void AESTest() {
+            AES aes = new AES();
+            MD5Hash hasher = new MD5Hash();
+            string message = "tevirp";
+            string pass = "opaf5";
+            string hash = hasher.GetHash(pass, true);
+            string encrypted = aes.Encrypt(message, hash, true);
+            string decrypted = aes.Decrypt(encrypted, hash);
+            Console.WriteLine($"message: {message}\npass: {pass}\n" +
+                $"encrypted msg: {encrypted}\ndecrypted msg: {decrypted}");
+        }
+
         private static void Md5Test() {
             Md5 md5 = new Md5();
             while (true) {
