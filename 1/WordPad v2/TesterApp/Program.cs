@@ -86,10 +86,10 @@ namespace TesterApp {
             AES aes = new AES();
             MD5Hash hasher = new MD5Hash();
             string message = "GOVNDJSHSKHFKJLHSDNDFLN";
-            string pass = "opaf5";
+            string pass = "123456";
             string hash = hasher.GetHash(pass, true);
             string encrypted = aes.Encrypt(message, hash, true);
-            string decrypted = aes.Decrypt(encrypted, hash);
+            string decrypted = aes.Decrypt(encrypted, hasher.GetHash("123456", true));
             Console.WriteLine($"message: {message}\npass: {pass}\n" +
                 $"encrypted msg: {encrypted}\ndecrypted msg: {decrypted}");
         }

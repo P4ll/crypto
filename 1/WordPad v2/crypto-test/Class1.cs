@@ -20,7 +20,7 @@ namespace Plugin {
             _form = form;
 
             _menu = (MenuStrip)form.Controls[1];
-            ToolStripMenuItem item = new ToolStripMenuItem("Crypto test");
+            ToolStripMenuItem item = new ToolStripMenuItem("Crypto");
 
             StdGenerator stdGen = new StdGenerator(ref _textBox);
             YarrowGenerator yGen = new YarrowGenerator(ref _textBox);

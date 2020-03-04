@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace crypto_test {
     public class AES {
-
+        private RichTextBox _textBox;
+        private Form _form;
+        private Utils.Progress _progress;
+        private string _hashPass;
         private byte[] _sBox =  {0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
                                 0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
                                 0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15,
@@ -48,7 +52,20 @@ namespace crypto_test {
         public AES() {
 
         }
+
+        public AES(ref RichTextBox textBox, ref Form form, ref string hashPass) {
+            _textBox = textBox;
+            _form = form;
+            _hashPass = hashPass;
+        }
         
+        public void WindowCiper(object sender, EventArgs args) {
+
+        }
+
+        public void WindowDecrypt(object sender, EventArgs args) {
+
+        }
         /// <summary>
         /// Производит шифрование строки message с помощью хешированного пароля pass (128 бит)
         /// </summary>
@@ -95,13 +112,13 @@ namespace crypto_test {
                 ShiftRows(ref bytes, st, en);
                 MixCols(ref bytes, st, en);
                 AddRoundKey(ref bytes, st, ref _keysExp, i * Nb);
-                OutData(ref bytes, st, $"{i} encrypt");
+                //OutData(ref bytes, st, $"{i} encrypt");
             }
-            OutData(ref bytes, st, "out cycle encr");
+            //OutData(ref bytes, st, "out cycle encr");
             SubBytes(ref bytes, st, en);
             ShiftRows(ref bytes, st, en);
             AddRoundKey(ref bytes, st, ref _keysExp, Nr * Nb);
-            OutData(ref bytes, st, "out encr");
+            //OutData(ref bytes, st, "out encr");
         }
 
         public string Decrypt(string text, string pass) {
@@ -126,18 +143,18 @@ namespace crypto_test {
             return Encoding.Default.GetString(decryptedMessage);
         }
         private void DecryptBlock(ref byte[] bytes, int st, int en) {
-            OutData(ref bytes, st, "init decr");
+            //OutData(ref bytes, st, "init decr");
             AddRoundKey(ref bytes, st, ref _keysExp, Nr * Nb);
             InvShiftRow(ref bytes, st, en);
             InvSubBytes(ref bytes, st, en);
-            OutData(ref bytes, st, "pre cycle decr");
+            //OutData(ref bytes, st, "pre cycle decr");
 
             for (int i = Nr - 1; i >= 1; --i) {
                 AddRoundKey(ref bytes, st, ref _keysExp, i * Nb);
                 InvMixCols(ref bytes, st, en);
                 InvShiftRow(ref bytes, st, en);
                 InvSubBytes(ref bytes, st, en);
-                OutData(ref bytes, st, $"{i} decr");
+                //OutData(ref bytes, st, $"{i} decr");
             }
             AddRoundKey(ref bytes, st, ref _keysExp, 0);
         }
