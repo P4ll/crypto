@@ -10,13 +10,82 @@ using crypto_test;
 namespace TesterApp {
     class Program {
         static void Main() {
+            //TestByteMult();
             AESTest();
+            //TestRoundKey();
+            //TestMixCols();
+        }
+
+        private static void TestByteMult() {
+            byte a = 60;
+            byte b = 161;
+            AES aes = new AES();
+            int c = aes.ByteMult(a, b);
+            Console.WriteLine(Convert.ToString(a, 2));
+            Console.WriteLine(Convert.ToString(b, 2));
+            Console.WriteLine(Convert.ToString(c, 10));
+        }
+        private static void TestRoundKey() {
+            byte[] bytes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+            int st = 0, en = 15;
+
+            OutTable(ref bytes);
+            AES aes = new AES();
+            MD5Hash hasher = new MD5Hash();
+            string hash = hasher.GetHash("abc", true);
+            byte[] passBytes = aes.GetBytesFromHash(hash);
+            List<byte> expKeys = aes.KeysExpansion(ref passBytes);
+            aes.AddRoundKey(ref bytes, st, ref expKeys, 0);
+            OutTable(ref bytes);
+            expKeys = aes.KeysExpansion(ref passBytes);
+            aes.AddRoundKey(ref bytes, st, ref expKeys, 0);
+            OutTable(ref bytes);
+        }
+        private static void TestMixCols() {
+            byte[] bytes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+            int st = 0, en = 15;
+            OutTable(ref bytes);
+            AES aes = new AES();
+            aes.MixCols(ref bytes, st, en);
+            OutTable(ref bytes);
+            aes.InvMixCols(ref bytes, st, en);
+            OutTable(ref bytes);
+        }
+        private static void TestSBox() {
+            byte[] bytes = { 83, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+            int st = 0, en = 15;
+            OutTable(ref bytes);
+            AES aes = new AES();
+            aes.SubBytes(ref bytes, st, en);
+            OutTable(ref bytes);
+            aes.InvSubBytes(ref bytes, st, en);
+            OutTable(ref bytes);
+        }
+        private static void TestShiftRows() {
+            byte[] bytes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+            int st = 0, en = 15;
+            OutTable(ref bytes);
+            AES aes = new AES();
+            aes.ShiftRows(ref bytes, st, en);
+            OutTable(ref bytes);
+            aes.InvShiftRow(ref bytes, st, en);
+            OutTable(ref bytes);
+        }
+        private static void OutTable(ref byte[] bytes) {
+            for (int i = 0; i < 4; ++i) {
+                for (int j = 0; j < 4; ++j) {
+                    Console.Write(bytes[i * 4 + j]);
+                    Console.Write(" ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
         }
 
         private static void AESTest() {
             AES aes = new AES();
             MD5Hash hasher = new MD5Hash();
-            string message = "tevirp";
+            string message = "GOVNDJSHSKHFKJLHSDNDFLN";
             string pass = "opaf5";
             string hash = hasher.GetHash(pass, true);
             string encrypted = aes.Encrypt(message, hash, true);
