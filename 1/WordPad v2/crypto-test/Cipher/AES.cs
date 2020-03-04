@@ -76,7 +76,7 @@ namespace crypto_test {
                 bytes.Add((byte)((bytes.Count >> (i * 8)) & 0xff));
             while (bytes.Count % 16 != 0)
                 bytes.Add(0);
-            byte[] passInByte = Encoding.ASCII.GetBytes(pass);
+            byte[] passInByte = GetBytesFromHash(pass);
             _keysExp = KeysExpansion(ref passInByte);
             // шифруются каждый из 128-ми битных блоков
             byte[] inputBytes = bytes.ToArray();
@@ -202,7 +202,7 @@ namespace crypto_test {
 
         public string Decrypt(string text, string pass) {
             byte[] bytes = Encoding.ASCII.GetBytes(text);
-            byte[] passInByte = Encoding.ASCII.GetBytes(pass);
+            byte[] passInByte = GetBytesFromHash(pass);
             _keysExp = KeysExpansion(ref passInByte);
             for (int i = 0; i < bytes.Length; i += 16) {
                 DecryptBlock(ref bytes, i, i + 15);
@@ -296,6 +296,13 @@ namespace crypto_test {
                 bb >>= 1;
             }
             return res;
+        }
+
+        private byte[] GetBytesFromHash(string str) {
+            return Enumerable.Range(0, str.Length)
+                     .Where(x => x % 2 == 0)
+                     .Select(x => Convert.ToByte(str.Substring(x, 2), 16))
+                     .ToArray();
         }
     }
 }
