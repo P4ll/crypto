@@ -4,3 +4,5 @@ D:\work\crypto\1\WordPad v2\WordPad\bin\x64\Debug\Plugins\cipher-plugin.pdb
 D:\work\crypto\1\WordPad v2\cipher-plugin\obj\Debug\cipher-plugin.csproj.CopyComplete
 D:\work\crypto\1\WordPad v2\cipher-plugin\obj\Debug\cipher-plugin.dll
 D:\work\crypto\1\WordPad v2\cipher-plugin\obj\Debug\cipher-plugin.pdb
+D:\work\crypto\1\WordPad v2\cipher-plugin\obj\Debug\cipher_plugin.Utils.InputForm.resources
+D:\work\crypto\1\WordPad v2\cipher-plugin\obj\Debug\cipher-plugin.csproj.GenerateResource.cache

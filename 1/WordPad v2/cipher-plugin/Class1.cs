@@ -49,12 +49,14 @@ namespace Plugin {
             openDialog.FileName = "";
             openDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (openDialog.ShowDialog() == DialogResult.OK) {
-                // load file
+                _hashPass = File.ReadAllText(openDialog.FileName);
             }
         }
 
         private void InputPass(object sender, EventArgs e) {
-
+            cipher_plugin.Utils.InputForm inputForm = new cipher_plugin.Utils.InputForm();
+            inputForm.Show();
+            _hashPass = inputForm.PassText;
             // open new form
             // input text
             // saveAs dialog
