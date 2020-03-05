@@ -57,6 +57,12 @@
     <Compile Include="Hash\MD5Hash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Testers\Tester.cs" />
+    <Compile Include="Utils\InputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utils\InputForm.Designer.cs">
+      <DependentUpon>InputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\MultiThreadHelper.cs" />
     <Compile Include="Utils\Progress.cs">
       <SubType>Form</SubType>
@@ -73,6 +79,9 @@
     <Compile Include="Utils\TextProgressBar.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Utils\InputForm.resx">
+      <DependentUpon>InputForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Utils\Progress.resx">
       <DependentUpon>Progress.cs</DependentUpon>
     </EmbeddedResource>

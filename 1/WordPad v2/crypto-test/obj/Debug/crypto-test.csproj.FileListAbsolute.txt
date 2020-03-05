@@ -14,3 +14,4 @@ D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csproj.GenerateRes
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csprojAssemblyReference.cache
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto-test.csproj.CopyComplete
 D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\crypto_test.Utils.TextForm.resources
+D:\work\crypto\1\WordPad v2\crypto-test\obj\Debug\cipher_plugin.Utils.InputForm.resources

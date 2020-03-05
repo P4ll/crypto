@@ -59,6 +59,13 @@ namespace crypto_test {
             _hashPass = hashPass;
         }
         
+        public void WindowCiper(object sender, EventArgs args) {
+
+        }
+
+        public void WindowDecrypt(object sender, EventArgs args) {
+
+        }
         /// <summary>
         /// Производит шифрование строки message с помощью хешированного пароля pass (128 бит)
         /// </summary>
@@ -115,10 +122,6 @@ namespace crypto_test {
         }
 
         public string Decrypt(string text, string pass) {
-            if (text.Length % 32 != 0) {
-                MessageBox.Show("Сообщение не было зашифровано этим алгоритмом");
-                return text;
-            }
             // byte[] bytes = Encoding.Default.GetBytes(text);
             byte[] bytes = GetBytesFromHash(text);
             byte[] passInByte = GetBytesFromHash(pass);
@@ -129,11 +132,8 @@ namespace crypto_test {
             // поток байт имеет следующую структуру: b[0]..b[k], s[4]..s[0], 0..0
             // b - байты сообщения, s - 4 байта размера сообщения
             int messageRightIndex = bytes.Length - 1;
-            while (bytes[messageRightIndex] == 0 && messageRightIndex > 0) {
+            while (bytes[messageRightIndex] == 0) {
                 --messageRightIndex;
-            }
-            if (messageRightIndex == 0) {
-                return "";
             }
             messageRightIndex -= 4;
             byte[] decryptedMessage = new byte[messageRightIndex + 1];

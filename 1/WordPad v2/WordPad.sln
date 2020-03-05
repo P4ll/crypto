@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypto-test", "crypto-test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesterApp", "TesterApp\TesterApp.csproj", "{BC0EF6D0-D020-4075-B1AA-E851BF431D90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cipher-plugin", "cipher-plugin\cipher-plugin.csproj", "{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,14 +41,6 @@ Global
 		{BC0EF6D0-D020-4075-B1AA-E851BF431D90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC0EF6D0-D020-4075-B1AA-E851BF431D90}.Release|x64.ActiveCfg = Release|Any CPU
 		{BC0EF6D0-D020-4075-B1AA-E851BF431D90}.Release|x64.Build.0 = Release|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Debug|x64.Build.0 = Debug|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Release|x64.ActiveCfg = Release|Any CPU
-		{3A9891C7-24E7-41C8-9B4D-8A3DC79C0D6F}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
