@@ -10,7 +10,7 @@ namespace crypto_test {
         private RichTextBox _textBox;
         private Form _form;
         private Utils.Progress _progress;
-        private string _hashPass;
+        //private string _hashPass;
         private byte[] _sBox =  {0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
                                 0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
                                 0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15,
@@ -53,10 +53,9 @@ namespace crypto_test {
 
         }
 
-        public AES(ref RichTextBox textBox, ref Form form, ref string hashPass) {
+        public AES(ref RichTextBox textBox, ref Form form) {
             _textBox = textBox;
             _form = form;
-            _hashPass = hashPass;
         }
         
         /// <summary>
@@ -91,10 +90,19 @@ namespace crypto_test {
             _keysExp = KeysExpansion(ref passInByte);
             // шифруются каждый из 128-ми битных блоков
             byte[] inputBytes = bytes.ToArray();
+            if (_form != null) {
+                _progress = new Utils.Progress(0, bytes.Count, 16, "Зашифровка");
+                _progress.Show();
+            }
             for (int i = 0; i < bytes.Count; i += 16) {
                 EncryptBlock(ref inputBytes, i, i + 15);
+                if (_form != null) {
+                    _progress.PerformStep();
+                }
             }
-
+            if (_form != null) {
+                _progress.CloseFormSafe();
+            }
             return BitConverter.ToString(inputBytes).Replace("-", string.Empty);
         }
 
@@ -123,8 +131,18 @@ namespace crypto_test {
             byte[] bytes = GetBytesFromHash(text);
             byte[] passInByte = GetBytesFromHash(pass);
             _keysExp = KeysExpansion(ref passInByte);
+            if (_form != null) {
+                _progress = new Utils.Progress(0, bytes.Length, 16, "Расшифровка");
+                _progress.Show();
+            }
             for (int i = 0; i < bytes.Length; i += 16) {
                 DecryptBlock(ref bytes, i, i + 15);
+                if (_form != null) {
+                    _progress.PerformStep();
+                }
+            }
+            if (_form != null) {
+                _progress.CloseFormSafe();
             }
             // поток байт имеет следующую структуру: b[0]..b[k], s[4]..s[0], 0..0
             // b - байты сообщения, s - 4 байта размера сообщения

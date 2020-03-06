@@ -14,8 +14,10 @@ namespace Plugin {
         public const string Name = "Crypto";
         private RichTextBox _textBox;
         private Form _form;
-        private int _pos, _pos2;
+        private int _pos, _pos2, _pos3;
         private MenuStrip _menu;
+
+        private ElGamal elGamal;
 
         public void run(ref Form form, ref RichTextBox textBox) {
             _textBox = textBox;
@@ -24,6 +26,7 @@ namespace Plugin {
             _menu = (MenuStrip)form.Controls[1];
             ToolStripMenuItem item = new ToolStripMenuItem("Crypto");
             ToolStripMenuItem cipherItem = new ToolStripMenuItem("AES cipher");
+            ToolStripMenuItem asyncCipher = new ToolStripMenuItem("El Gamal cipher");
 
             StdGenerator stdGen = new StdGenerator(ref _textBox);
             YarrowGenerator yGen = new YarrowGenerator(ref _textBox);
@@ -56,17 +59,39 @@ namespace Plugin {
             cipherItem.DropDownItems[2].Click += LoadHashFromFile;
             cipherItem.DropDownItems[3].Click += InputPass;
 
+            asyncCipher.DropDownItems.Add("Зашифровать");
+            asyncCipher.DropDownItems.Add("Расшифровать");
+
+            asyncCipher.DropDownItems[0].Click += EncryptElGamal;
+            asyncCipher.DropDownItems[1].Click += DecryptElGamal;
+
             _menu.Items.Add(item);
             _menu.Items.Add(cipherItem);
-            _pos = _menu.Items.Count - 2;
-            _pos2 = _menu.Items.Count - 1;
+            _menu.Items.Add(asyncCipher);
+            _pos = _menu.Items.Count - 3;
+            _pos2 = _menu.Items.Count - 2;
+            _pos3 = _menu.Items.Count - 1;
         }
 
         public void stop() {
             _menu.Items.RemoveAt(_pos);
             _menu.Items.RemoveAt(_pos2 - 1);
+            _menu.Items.RemoveAt(_pos3 - 2);
         }
 
+        private void EncryptElGamal(object sender, EventArgs e) {
+            elGamal = new ElGamal(ref _textBox, ref _form);
+            string curExt = WordPad.Helpers.ReadHelper.GetExtention(_form.Text);
+            bool isText = false;
+            if (WordPad.Form1.TxtExts.Any(str => str == curExt)) {
+                isText = true;
+            }
+            _textBox.Text = elGamal.Encrypt(_textBox.Text, isText);
+        }
+
+        private void DecryptElGamal(object sender, EventArgs e) {
+            _textBox.Text = elGamal.Decrypt(_textBox.Text);
+        }
          private void LoadHashFromFile(object sender, EventArgs e) {
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.FileName = "";
@@ -86,7 +111,7 @@ namespace Plugin {
                 MessageBox.Show("Не был введён пароль");
                 return;
             }
-            AES aes = new AES();
+            AES aes = new AES(ref _textBox, ref _form);
             _textBox.Text = aes.Encrypt(_textBox.Text, HashPass, true);
         }
 
@@ -95,7 +120,7 @@ namespace Plugin {
                 MessageBox.Show("Не был введён пароль");
                 return;
             }
-            AES aes = new AES();
+            AES aes = new AES(ref _textBox, ref _form);
             _textBox.Text = aes.Decrypt(_textBox.Text, HashPass);
         }
     }

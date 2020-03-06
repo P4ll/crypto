@@ -6,14 +6,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using crypto_test;
+using System.Numerics;
 
 namespace TesterApp {
     class Program {
         static void Main() {
             //TestByteMult();
-            AESTest();
+            //AESTest();
             //TestRoundKey();
             //TestMixCols();
+            //IsPrimeTest();
+            //PrimeGenTest();
+            ElGamalTest();
+        }
+        
+        private static void ElGamalTest() {
+            ElGamal cipher = new ElGamal();
+            string text = "1781284hv923vh923hv93h543ljn5 b4hh43no n453n54o3 nu43n 54 nu3 j4n";
+            string enText = cipher.Encrypt(text, true);
+            Console.WriteLine(enText);
+            string deText = cipher.Decrypt(enText);
+            Console.WriteLine(deText);
+        }
+
+        private static void PrimeGenTest() {
+            for (int i = 2; i < 1e5; i *= 10) {
+                Console.WriteLine(crypto_test.Utils.BigNumbersHelper.RandPrime(i));
+            }
+        }
+
+        private static void IsPrimeTest() {
+            for (int i = 0; i < 1e6; ++i) {
+                Console.Write($"{i}: ");
+                if (crypto_test.Utils.BigNumbersHelper.IsPrime(new BigInteger(i))) {
+                    Console.WriteLine("PRIME");
+                }
+                else {
+                    Console.WriteLine("COMP");
+                }
+            }
         }
 
         private static void TestByteMult() {
