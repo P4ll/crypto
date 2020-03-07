@@ -13,7 +13,7 @@ namespace crypto_test {
         private const ulong AConst = 1103515245;
         private const ulong BConst = 65539;//65539;48271
         private const ulong CConst = 12345; //12345;
-        private const ulong MConst = (ulong)1 << 31;
+        private const ulong MConst = ((ulong)1 << 31) - 1;
         private ulong _curAns = Seed;
 
         public SquareGenerator(ref RichTextBox textBox) : base(ref textBox) {
@@ -24,8 +24,8 @@ namespace crypto_test {
 
         public ulong Next() {
             //_curAns = ((AConst * AConst * _curAns) % MConst + BConst * _curAns + CConst) % MConst;
-            //_curAns = Add(Mult(BConst, _curAns), CConst);
-            _curAns = Add(Add(Mult(Mult(AConst, AConst), _curAns), Mult(BConst, _curAns)), CConst);
+            _curAns = Add(Mult(BConst, _curAns), CConst);
+            //_curAns = Add(Add(Mult(Mult(AConst, AConst), _curAns), Mult(BConst, _curAns)), CConst);
             Console.WriteLine(_curAns);
             return _curAns;
         }
